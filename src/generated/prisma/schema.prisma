@@ -1,0 +1,180 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  CONTESTANT
+  PUBLIC
+}
+
+enum CompetitionType {
+  JURY
+  PUBLIC_VOTING
+}
+
+enum CompetitionStatus {
+  UPCOMING
+  ACTIVE
+  COMPLETED
+}
+
+enum ImageType {
+  FACE
+  FULL_BODY
+}
+
+enum EntryStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  passwordHash  String?
+  role          Role      @default(PUBLIC)
+  createdAt     DateTime  @default(now())
+
+  accounts   Account[]
+  sessions   Session[]
+  contestant Contestant?
+  votes      Vote[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Contestant {
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  fullName     String
+  age          Int
+  gender       String
+  country      String
+  height       Decimal
+  weight       Decimal
+  bodyType     String
+  eyeColor     String
+  hairColor    String
+  bio          String
+  instagram    String?
+  portfolioUrl String?
+  profileImage String?
+  createdAt    DateTime @default(now())
+
+  user    User               @relation(fields: [userId], references: [id])
+  images  ContestantImage[]
+  entries CompetitionEntry[]
+}
+
+model ContestantImage {
+  id           String    @id @default(cuid())
+  contestantId String
+  imageUrl     String
+  imageType    ImageType
+  createdAt    DateTime  @default(now())
+
+  contestant Contestant @relation(fields: [contestantId], references: [id])
+}
+
+model Competition {
+  id              String            @id @default(cuid())
+  title           String
+  description     String
+  competitionType CompetitionType
+  startDate       DateTime
+  endDate         DateTime
+  status          CompetitionStatus @default(UPCOMING)
+  createdAt       DateTime          @default(now())
+
+  entries CompetitionEntry[]
+  votes   Vote[]
+}
+
+model CompetitionEntry {
+  id            String      @id @default(cuid())
+  competitionId String
+  contestantId  String
+  status        EntryStatus @default(PENDING)
+  overallScore  Decimal?
+  voteCount     Int         @default(0)
+  rank          Int?
+  createdAt     DateTime    @default(now())
+
+  competition Competition  @relation(fields: [competitionId], references: [id])
+  contestant  Contestant   @relation(fields: [contestantId], references: [id])
+  scoreResult ScoreResult?
+
+  @@unique([competitionId, contestantId])
+}
+
+model Vote {
+  id            String   @id @default(cuid())
+  competitionId String
+  contestantId  String
+  voterId       String
+  ipHash        String?
+  createdAt     DateTime @default(now())
+
+  competition Competition @relation(fields: [competitionId], references: [id])
+  voter       User        @relation(fields: [voterId], references: [id])
+
+  @@unique([competitionId, voterId])
+}
+
+model ScoreResult {
+  id                   String   @id @default(cuid())
+  entryId              String   @unique
+  presentationScore    Decimal
+  confidenceScore      Decimal
+  stylingScore         Decimal
+  profileScore         Decimal
+  professionalismScore Decimal
+  overallScore         Decimal
+  createdAt            DateTime @default(now())
+
+  entry CompetitionEntry @relation(fields: [entryId], references: [id])
+}
