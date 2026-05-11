@@ -6,6 +6,7 @@ export async function POST(req: NextRequest) {
   const session = await auth();
   if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
+  const userId = session.user.id;
   const { competitionId, contestantId, entryId } = await req.json();
 
   const competition = await db.competition.findUnique({ where: { id: competitionId } });
@@ -17,13 +18,13 @@ export async function POST(req: NextRequest) {
   if (!entry || entry.status !== "APPROVED") return NextResponse.json({ error: "Entry not approved" }, { status: 400 });
 
   const existingVote = await db.vote.findUnique({
-    where: { competitionId_voterId: { competitionId, voterId: session.user.id! } },
+    where: { competitionId_voterId: { competitionId, voterId: userId } },
   });
   if (existingVote) return NextResponse.json({ error: "Already voted" }, { status: 409 });
 
   const vote = await db.$transaction(async (tx) => {
     const v = await tx.vote.create({
-      data: { competitionId, contestantId, voterId: session.user.id! },
+      data: { competitionId, contestantId, voterId: userId },
     });
     await tx.competitionEntry.update({
       where: { id: entryId },

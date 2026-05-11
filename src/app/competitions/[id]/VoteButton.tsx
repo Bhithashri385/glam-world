@@ -35,7 +35,7 @@ export default function VoteButton({
 
   async function handleVote() {
     setLoading(true);
-    const res = await fetch("/api/votes", {
+    const res = await fetch("/api/vote", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ competitionId, contestantId, entryId }),

@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
 import ShareButton from "./ShareButton";
+import Link from "next/link";
 
 export default async function PublicProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -25,7 +26,7 @@ export default async function PublicProfilePage({ params }: { params: Promise<{ 
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-3xl mx-auto">
         <div className="mb-6">
-          <a href="/competitions" className="text-sm text-gray-500 hover:text-pink-500">← All Competitions</a>
+          <Link href="/competitions" className="text-sm text-gray-500 hover:text-pink-500">← All Competitions</Link>
         </div>
 
         {/* Profile Header */}

@@ -1,10 +1,12 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
+import UserManagementTable from "@/components/UserManagementTable";
+import { isAdmin } from "@/lib/session-role";
 
 export default async function AdminPage() {
   const session = await auth();
-  if (!session || (session.user as any).role !== "ADMIN") redirect("/");
+  if (!isAdmin(session)) redirect("/");
 
   const [competitions, users] = await Promise.all([
     db.competition.findMany({ orderBy: { createdAt: "desc" } }),
@@ -43,7 +45,7 @@ export default async function AdminPage() {
           </a>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden mb-8">
           {competitions.length === 0 ? (
             <p className="text-center text-gray-400 py-10 text-sm">No competitions yet.</p>
           ) : (
@@ -81,6 +83,9 @@ export default async function AdminPage() {
             </table>
           )}
         </div>
+
+        <h2 className="text-lg font-semibold text-gray-800 mb-4">User Management</h2>
+        <UserManagementTable users={users} />
       </div>
     </div>
   );

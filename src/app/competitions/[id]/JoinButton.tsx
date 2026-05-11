@@ -2,13 +2,16 @@
 
 import { useState } from "react";
 
+type EntryStatus = "PENDING" | "APPROVED" | "REJECTED";
+type JoinEntry = { id: string; status: EntryStatus };
+
 export default function JoinButton({ competitionId, contestantId, existingEntry, competitionStatus }: {
   competitionId: string;
   contestantId: string;
-  existingEntry: any;
+  existingEntry: JoinEntry | null;
   competitionStatus: string;
 }) {
-  const [entry, setEntry] = useState(existingEntry);
+  const [entry, setEntry] = useState<JoinEntry | null>(existingEntry);
   const [loading, setLoading] = useState(false);
 
   async function handleJoin() {
@@ -19,7 +22,7 @@ export default function JoinButton({ competitionId, contestantId, existingEntry,
       body: JSON.stringify({ competitionId, contestantId }),
     });
     const data = await res.json();
-    if (res.ok) setEntry(data.entry);
+    if (res.ok) setEntry(data.entry as JoinEntry);
     setLoading(false);
   }
 

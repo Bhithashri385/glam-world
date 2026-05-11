@@ -11,7 +11,16 @@ const CATEGORIES = [
   { key: "professionalismScore", label: "Professionalism" },
 ];
 
-export default function ScoreForm({ entryId, existing }: { entryId: string; existing: any | null }) {
+type ExistingScores = {
+  presentationScore: number;
+  confidenceScore: number;
+  stylingScore: number;
+  profileScore: number;
+  professionalismScore: number;
+  overallScore: number;
+};
+
+export default function ScoreForm({ entryId, existing }: { entryId: string; existing: ExistingScores | null }) {
   const router = useRouter();
   const [scores, setScores] = useState({
     presentationScore: existing?.presentationScore?.toString() ?? "",
@@ -27,7 +36,7 @@ export default function ScoreForm({ entryId, existing }: { entryId: string; exis
     e.preventDefault();
     setLoading(true);
     setSaved(false);
-    await fetch("/api/scores", {
+    await fetch("/api/score", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -8,7 +8,10 @@ export default async function ProfilePage() {
   if (!session) redirect("/login");
 
   const raw = session.user?.id
-    ? await db.contestant.findUnique({ where: { userId: session.user.id } })
+    ? await db.contestant.findUnique({
+        where: { userId: session.user.id },
+        include: { images: true },
+      })
     : null;
 
   const contestant = raw

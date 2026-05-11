@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { isAdmin } from "@/lib/session-role";
 
 export async function GET() {
   const competitions = await db.competition.findMany({
@@ -11,7 +12,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const session = await auth();
-  if (!session?.user?.id || (session.user as any).role !== "ADMIN") {
+  if (!session?.user?.id || !isAdmin(session)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

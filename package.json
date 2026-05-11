@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "security:scan": "node scripts/secret-scan.mjs"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
@@ -14,6 +15,7 @@
     "@prisma/client": "^7.8.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/pg": "^8.20.0",
+    "aws-sdk": "^2.1693.0",
     "bcryptjs": "^3.0.3",
     "cloudinary": "^2.10.0",
     "next": "16.2.6",

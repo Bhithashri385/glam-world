@@ -1,6 +1,7 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
+import Link from "next/link";
 
 export default async function MyEntriesPage() {
   const session = await auth();
@@ -22,7 +23,7 @@ export default async function MyEntriesPage() {
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-4xl mx-auto">
         <div className="mb-6">
-          <a href="/dashboard" className="text-sm text-gray-500 hover:text-pink-500">← Dashboard</a>
+          <Link href="/dashboard" className="text-sm text-gray-500 hover:text-pink-500">← Dashboard</Link>
         </div>
 
         <h1 className="text-2xl font-bold text-gray-900 mb-6">My Competition Entries</h1>
@@ -30,18 +31,18 @@ export default async function MyEntriesPage() {
         {!contestant && (
           <div className="bg-white rounded-xl p-8 text-center shadow-sm border border-gray-100">
             <p className="text-gray-500 text-sm mb-4">You need to complete your profile before joining competitions.</p>
-            <a href="/dashboard/profile" className="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-lg text-sm font-medium transition">
+            <Link href="/dashboard/profile" className="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-lg text-sm font-medium transition">
               Complete Profile
-            </a>
+            </Link>
           </div>
         )}
 
         {contestant && contestant.entries.length === 0 && (
           <div className="bg-white rounded-xl p-8 text-center shadow-sm border border-gray-100">
             <p className="text-gray-500 text-sm mb-4">You haven&apos;t joined any competitions yet.</p>
-            <a href="/competitions" className="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-lg text-sm font-medium transition">
+            <Link href="/competitions" className="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2 rounded-lg text-sm font-medium transition">
               Browse Competitions
-            </a>
+            </Link>
           </div>
         )}
 
@@ -51,9 +52,9 @@ export default async function MyEntriesPage() {
               <div key={entry.id} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
                 <div className="flex justify-between items-start">
                   <div>
-                    <a href={`/competitions/${entry.competitionId}`} className="font-semibold text-gray-900 hover:text-pink-500 transition">
+                    <Link href={`/competitions/${entry.competitionId}`} className="font-semibold text-gray-900 hover:text-pink-500 transition">
                       {entry.competition.title}
-                    </a>
+                    </Link>
                     <p className="text-xs text-gray-400 mt-1">
                       {entry.competition.competitionType === "JURY" ? "Jury Based" : "Public Voting"} · {entry.competition.status}
                     </p>

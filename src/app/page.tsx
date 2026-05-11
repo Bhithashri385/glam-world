@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default async function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
@@ -12,12 +14,12 @@ export default async function Home() {
           Join competitions, get discovered by expert juries, and let the world vote for you on GlamWorld.
         </p>
         <div className="flex gap-4 justify-center">
-          <a href="/competitions" className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-xl text-sm font-semibold transition shadow-md shadow-pink-200">
+          <Link href="/competitions" className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-xl text-sm font-semibold transition shadow-md shadow-pink-200">
             View Competitions
-          </a>
-          <a href="/register" className="border border-pink-200 hover:border-pink-400 text-pink-500 px-8 py-3 rounded-xl text-sm font-semibold transition">
+          </Link>
+          <Link href="/register" className="border border-pink-200 hover:border-pink-400 text-pink-500 px-8 py-3 rounded-xl text-sm font-semibold transition">
             Register as Contestant
-          </a>
+          </Link>
         </div>
       </div>
 

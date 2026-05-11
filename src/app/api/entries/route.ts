@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { isAdmin } from "@/lib/session-role";
 
 export async function POST(req: NextRequest) {
   const session = await auth();
   if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const { competitionId, contestantId } = await req.json();
+  if (!competitionId || !contestantId) {
+    return NextResponse.json({ error: "competitionId and contestantId are required" }, { status: 400 });
+  }
 
   const existing = await db.competitionEntry.findUnique({
     where: { competitionId_contestantId: { competitionId, contestantId } },
@@ -23,7 +27,7 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   const session = await auth();
-  if (!session || (session.user as any).role !== "ADMIN") {
+  if (!isAdmin(session)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -41,11 +45,17 @@ export async function GET(req: NextRequest) {
 
 export async function PATCH(req: NextRequest) {
   const session = await auth();
-  if (!session || (session.user as any).role !== "ADMIN") {
+  if (!isAdmin(session)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const { entryId, status } = await req.json();
+  if (!entryId || !status) {
+    return NextResponse.json({ error: "entryId and status are required" }, { status: 400 });
+  }
+  if (!["PENDING", "APPROVED", "REJECTED"].includes(status)) {
+    return NextResponse.json({ error: "Invalid status" }, { status: 400 });
+  }
 
   const entry = await db.competitionEntry.update({
     where: { id: entryId },

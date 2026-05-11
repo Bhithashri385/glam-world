@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default async function DashboardPage() {
   const session = await auth();
@@ -15,29 +16,29 @@ export default async function DashboardPage() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <a
+          <Link
             href="/dashboard/profile"
             className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:border-pink-200 transition"
           >
             <h2 className="font-semibold text-gray-800 mb-1">My Profile</h2>
             <p className="text-sm text-gray-500">Build your contestant profile</p>
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="/competitions"
             className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:border-pink-200 transition"
           >
             <h2 className="font-semibold text-gray-800 mb-1">Competitions</h2>
             <p className="text-sm text-gray-500">Browse and join competitions</p>
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="/dashboard/competitions"
             className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:border-pink-200 transition"
           >
             <h2 className="font-semibold text-gray-800 mb-1">My Entries</h2>
             <p className="text-sm text-gray-500">View your competition entries</p>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

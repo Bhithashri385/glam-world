@@ -6,6 +6,20 @@ const GENDERS = ["Female", "Male", "Non-binary", "Prefer not to say"];
 const BODY_TYPES = ["Slim", "Athletic", "Average", "Curvy", "Plus size"];
 
 type ImageEntry = { localUrl: string; imageId: string | null; uploading: boolean };
+type ExistingContestant = {
+  fullName?: string;
+  age?: number;
+  gender?: string;
+  country?: string;
+  height?: number;
+  weight?: number;
+  bodyType?: string;
+  eyeColor?: string;
+  hairColor?: string;
+  bio?: string;
+  instagram?: string | null;
+  portfolioUrl?: string | null;
+} | null;
 
 function ImageUploader({ type, label }: { type: string; label: string }) {
   const [images, setImages] = useState<ImageEntry[]>([]);
@@ -93,7 +107,7 @@ function ImageUploader({ type, label }: { type: string; label: string }) {
   );
 }
 
-export default function ProfileForm({ existing }: { existing: any }) {
+export default function ProfileForm({ existing }: { existing: ExistingContestant }) {
   const [form, setForm] = useState({
     fullName: existing?.fullName || "",
     age: existing?.age || "",

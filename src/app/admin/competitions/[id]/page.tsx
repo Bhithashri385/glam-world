@@ -5,10 +5,11 @@ import { notFound } from "next/navigation";
 import EntryActions from "./EntryActions";
 import StatusButton from "./StatusButton";
 import ScoreForm from "./ScoreForm";
+import { isAdmin } from "@/lib/session-role";
 
 export default async function AdminCompetitionPage({ params }: { params: Promise<{ id: string }> }) {
   const session = await auth();
-  if (!session || (session.user as any).role !== "ADMIN") redirect("/");
+  if (!isAdmin(session)) redirect("/");
 
   const { id } = await params;
 

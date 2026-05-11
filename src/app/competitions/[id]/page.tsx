@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import JoinButton from "./JoinButton";
 import VoteButton from "./VoteButton";
 
@@ -49,7 +50,7 @@ export default async function CompetitionDetailPage({ params }: { params: Promis
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-4xl mx-auto">
         <div className="mb-6">
-          <a href="/competitions" className="text-sm text-gray-500 hover:text-pink-500">← All Competitions</a>
+          <Link href="/competitions" className="text-sm text-gray-500 hover:text-pink-500">← All Competitions</Link>
         </div>
 
         <div className="bg-white rounded-2xl shadow-sm p-6 mb-6">
@@ -90,16 +91,16 @@ export default async function CompetitionDetailPage({ params }: { params: Promis
           {session && !contestant && (
             <div className="mt-6">
               <p className="text-sm text-gray-500">
-                You need to <a href="/dashboard/profile" className="text-pink-500 hover:underline">complete your profile</a> before joining.
+                You need to <Link href="/dashboard/profile" className="text-pink-500 hover:underline">complete your profile</Link> before joining.
               </p>
             </div>
           )}
 
           {!session && (
             <div className="mt-6">
-              <a href="/login" className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-lg text-sm font-medium transition">
+              <Link href="/login" className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-lg text-sm font-medium transition">
                 Login to Join
-              </a>
+              </Link>
             </div>
           )}
         </div>
@@ -110,9 +111,14 @@ export default async function CompetitionDetailPage({ params }: { params: Promis
               <h2 className="font-semibold text-gray-800">
                 {isPublicVoting ? "Leaderboard" : "Approved Contestants"} ({competition.entries.length})
               </h2>
-              {isPublicVoting && isActive && !session && (
-                <a href="/login" className="text-xs text-pink-500 hover:underline">Login to vote</a>
-              )}
+              <div className="flex gap-2">
+                <Link href={`/competitions/${id}/leaderboard`} className="text-xs bg-pink-100 text-pink-600 hover:bg-pink-200 px-3 py-1 rounded-full transition">
+                  📊 Full Leaderboard
+                </Link>
+                {isPublicVoting && isActive && !session && (
+                  <Link href="/login" className="text-xs text-pink-500 hover:underline">Login to vote</Link>
+                )}
+              </div>
             </div>
             <div className="space-y-3">
               {competition.entries.map((entry, i) => {
@@ -127,9 +133,9 @@ export default async function CompetitionDetailPage({ params }: { params: Promis
                       <img src={entry.contestant.profileImage} alt="" className="w-10 h-10 rounded-full object-cover" />
                     )}
                     <div className="flex-1">
-                      <a href={`/contestants/${entry.contestantId}`} className="text-sm font-medium text-gray-900 hover:text-pink-500 transition">
+                      <Link href={`/contestants/${entry.contestantId}`} className="text-sm font-medium text-gray-900 hover:text-pink-500 transition">
                         {entry.contestant.fullName}
-                      </a>
+                      </Link>
                       <p className="text-xs text-gray-500">{entry.contestant.country}</p>
                     </div>
                     {isPublicVoting && (
