@@ -39,27 +39,32 @@ export default function LoginPage() {
           Sign in to your account
         </p>
 
-        {error && (
-          <p className="text-red-500 text-sm text-center mb-4">{error}</p>
-        )}
-
         <form onSubmit={handleEmailLogin} className="space-y-4 mb-4">
           <input
             type="email"
             placeholder="Email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => { setEmail(e.target.value); setError(""); }}
             required
             className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400"
           />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400"
-          />
+          <div>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => { setPassword(e.target.value); setError(""); }}
+              required
+              className={`w-full border rounded-lg px-4 py-2 text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 ${
+                error ? "border-red-400 focus:ring-red-300" : "border-gray-300 focus:ring-pink-400"
+              }`}
+            />
+            {error && (
+              <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1">
+                ✕ {error}
+              </p>
+            )}
+          </div>
           <button
             type="submit"
             disabled={loading}
