@@ -6,6 +6,7 @@ const GENDERS = ["Female", "Male", "Non-binary", "Prefer not to say"];
 const BODY_TYPES = ["Slim", "Athletic", "Average", "Curvy", "Plus size"];
 
 type ImageEntry = { localUrl: string; imageId: string | null; uploading: boolean };
+type ExistingImage = { id: string; imageUrl: string; imageType: "FACE" | "FULL_BODY" };
 type ExistingContestant = {
   fullName?: string;
   age?: number;
@@ -19,19 +20,28 @@ type ExistingContestant = {
   bio?: string;
   instagram?: string | null;
   portfolioUrl?: string | null;
+  profileImage?: string | null;
+  images?: ExistingImage[];
 } | null;
 
-function ImageUploader({ type, label }: { type: string; label: string }) {
-  const [images, setImages] = useState<ImageEntry[]>([]);
+function ImageUploader({
+  type,
+  label,
+  initial,
+}: {
+  type: string;
+  label: string;
+  initial: ImageEntry[];
+}) {
+  const [images, setImages] = useState<ImageEntry[]>(initial);
 
   async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const files = e.target.files;
     if (!files?.length) return;
 
-    // Profile allows only one image — remove old one first
     if (type === "profile" && images.length > 0) {
       const existing = images[0];
-      if (existing.imageId) {
+      if (existing.imageId || existing.localUrl) {
         await fetch("/api/upload", {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
@@ -51,6 +61,12 @@ function ImageUploader({ type, label }: { type: string; label: string }) {
       const res = await fetch("/api/upload", { method: "POST", body: formData });
       const data = await res.json();
 
+      if (!res.ok) {
+        setImages((prev) => prev.filter((img) => img.localUrl !== localUrl));
+        alert(data.error || "Upload failed");
+        continue;
+      }
+
       setImages((prev) =>
         prev.map((img) =>
           img.localUrl === localUrl
@@ -59,16 +75,16 @@ function ImageUploader({ type, label }: { type: string; label: string }) {
         )
       );
     }
+
+    e.target.value = "";
   }
 
   async function handleRemove(img: ImageEntry) {
-    if (img.imageId) {
-      await fetch("/api/upload", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ imageId: img.imageId, type }),
-      });
-    }
+    await fetch("/api/upload", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ imageId: img.imageId, type }),
+    });
     setImages((prev) => prev.filter((i) => i.localUrl !== img.localUrl));
   }
 
@@ -125,6 +141,22 @@ export default function ProfileForm({ existing }: { existing: ExistingContestant
 
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
+
+  const initialProfile: ImageEntry[] = existing?.profileImage
+    ? [{ localUrl: existing.profileImage, imageId: null, uploading: false }]
+    : [];
+  const initialFace: ImageEntry[] =
+    existing?.images?.filter((i) => i.imageType === "FACE").map((i) => ({
+      localUrl: i.imageUrl,
+      imageId: i.id,
+      uploading: false,
+    })) ?? [];
+  const initialFullBody: ImageEntry[] =
+    existing?.images?.filter((i) => i.imageType === "FULL_BODY").map((i) => ({
+      localUrl: i.imageUrl,
+      imageId: i.id,
+      uploading: false,
+    })) ?? [];
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -235,9 +267,12 @@ export default function ProfileForm({ existing }: { existing: ExistingContestant
 
       <div className="border-t pt-5 space-y-4">
         <p className="text-sm font-semibold text-gray-700">Images</p>
-        <ImageUploader type="profile" label="Profile Image" />
-        <ImageUploader type="face" label="Face Images (multiple allowed)" />
-        <ImageUploader type="full_body" label="Full Body Images (multiple allowed)" />
+        {!existing && (
+          <p className="text-xs text-gray-500">Save your profile first to enable image uploads.</p>
+        )}
+        <ImageUploader type="profile" label="Profile Image" initial={initialProfile} />
+        <ImageUploader type="face" label="Face Images (multiple allowed)" initial={initialFace} />
+        <ImageUploader type="full_body" label="Full Body Images (multiple allowed)" initial={initialFullBody} />
       </div>
 
       {message && (

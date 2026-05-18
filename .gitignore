@@ -41,6 +41,9 @@ yarn-error.log*
 # local secret scan output
 secrets-report.txt
 
+# user-uploaded files (local fallback when DO Spaces is not configured)
+/public/uploads/
+
 # vercel
 .vercel
 
