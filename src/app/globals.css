@@ -1,26 +1,128 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0014;
+  --foreground: #fafafa;
+  --muted: #1a0a2e;
+  --muted-foreground: #a78bfa;
+  --border: #2a1844;
+  --card: #15082a;
+  --card-foreground: #fafafa;
+  --primary: #a855f7;
+  --primary-foreground: #ffffff;
+  --accent: #fbbf24;
+  --accent-foreground: #0a0014;
+  --ring: #a855f7;
+  --glass-bg: rgba(26, 10, 46, 0.55);
+  --glass-border: rgba(168, 85, 247, 0.18);
+  --radius: 1rem;
+
+  --gradient-royal: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
+  --gradient-gold: linear-gradient(135deg, #fbbf24 0%, #d4af37 100%);
+  --gradient-luxe: linear-gradient(135deg, #a855f7 0%, #fbbf24 100%);
+}
+
+.light {
+  --background: #fdfaff;
+  --foreground: #1a0a2e;
+  --muted: #f3ecff;
+  --muted-foreground: #6b4296;
+  --border: #e9d8ff;
+  --card: #ffffff;
+  --card-foreground: #1a0a2e;
+  --primary: #7e22ce;
+  --primary-foreground: #ffffff;
+  --accent: #d4af37;
+  --accent-foreground: #1a0a2e;
+  --ring: #7e22ce;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(126, 34, 206, 0.18);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ring: var(--ring);
+  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-inter);
+  --radius-base: var(--radius);
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(168, 85, 247, 0.18), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(251, 191, 36, 0.08), transparent 60%),
+    var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+
+.light body {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(168, 85, 247, 0.12), transparent 60%),
+    var(--background);
+}
+
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-playfair), Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+.text-gradient-luxe {
+  background: var(--gradient-luxe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-gold {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-gradient-royal {
+  background: var(--gradient-royal);
+}
+
+.bg-gradient-gold {
+  background: var(--gradient-gold);
+}
+
+.bg-gradient-luxe {
+  background: var(--gradient-luxe);
+}
+
+.glow-violet {
+  box-shadow: 0 0 24px rgba(168, 85, 247, 0.35), 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+body:has([data-dashboard]) > nav {
+  display: none;
+}
+
+.glow-gold {
+  box-shadow: 0 0 24px rgba(251, 191, 36, 0.35), 0 8px 32px rgba(0, 0, 0, 0.4);
 }

@@ -163,9 +163,14 @@ exports.Prisma.ContestantScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   fullName: 'fullName',
+  dateOfBirth: 'dateOfBirth',
   age: 'age',
   gender: 'gender',
   country: 'country',
+  city: 'city',
+  phone: 'phone',
+  occupation: 'occupation',
+  experience: 'experience',
   height: 'height',
   weight: 'weight',
   bodyType: 'bodyType',
@@ -175,7 +180,8 @@ exports.Prisma.ContestantScalarFieldEnum = {
   instagram: 'instagram',
   portfolioUrl: 'portfolioUrl',
   profileImage: 'profileImage',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ContestantImageScalarFieldEnum = {
@@ -194,6 +200,9 @@ exports.Prisma.CompetitionScalarFieldEnum = {
   startDate: 'startDate',
   endDate: 'endDate',
   status: 'status',
+  bannerImage: 'bannerImage',
+  prizePool: 'prizePool',
+  questions: 'questions',
   createdAt: 'createdAt'
 };
 
@@ -205,6 +214,17 @@ exports.Prisma.CompetitionEntryScalarFieldEnum = {
   overallScore: 'overallScore',
   voteCount: 'voteCount',
   rank: 'rank',
+  submittedAt: 'submittedAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.EntryAnswerScalarFieldEnum = {
+  id: 'id',
+  entryId: 'entryId',
+  order: 'order',
+  question: 'question',
+  answer: 'answer',
+  wordCount: 'wordCount',
   createdAt: 'createdAt'
 };
 
@@ -280,6 +300,7 @@ exports.Prisma.ModelName = {
   ContestantImage: 'ContestantImage',
   Competition: 'Competition',
   CompetitionEntry: 'CompetitionEntry',
+  EntryAnswer: 'EntryAnswer',
   Vote: 'Vote',
   ScoreResult: 'ScoreResult'
 };

@@ -88,22 +88,28 @@ model VerificationToken {
 }
 
 model Contestant {
-  id           String   @id @default(cuid())
-  userId       String   @unique
+  id           String    @id @default(cuid())
+  userId       String    @unique
   fullName     String
-  age          Int
-  gender       String
-  country      String
-  height       Decimal
-  weight       Decimal
-  bodyType     String
-  eyeColor     String
-  hairColor    String
-  bio          String
+  dateOfBirth  DateTime?
+  age          Int?
+  gender       String?
+  country      String?
+  city         String?
+  phone        String?
+  occupation   String?
+  experience   String?
+  height       Decimal?
+  weight       Decimal?
+  bodyType     String?
+  eyeColor     String?
+  hairColor    String?
+  bio          String?
   instagram    String?
   portfolioUrl String?
   profileImage String?
-  createdAt    DateTime @default(now())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @default(now()) @updatedAt
 
   user    User                 @relation(fields: [userId], references: [id])
   images  ContestantImage[]
@@ -128,6 +134,9 @@ model Competition {
   startDate       DateTime
   endDate         DateTime
   status          CompetitionStatus @default(UPCOMING)
+  bannerImage     String?
+  prizePool       String?
+  questions       String[]          @default([])
   createdAt       DateTime          @default(now())
 
   entries CompetitionEntry[]
@@ -142,13 +151,29 @@ model CompetitionEntry {
   overallScore   Decimal?
   voteCount      Int         @default(0)
   rank           Int?
+  submittedAt    DateTime?
   createdAt      DateTime    @default(now())
 
   competition  Competition   @relation(fields: [competitionId], references: [id])
   contestant   Contestant    @relation(fields: [contestantId], references: [id])
   scoreResult  ScoreResult?
+  answers      EntryAnswer[]
 
   @@unique([competitionId, contestantId])
+}
+
+model EntryAnswer {
+  id        String   @id @default(cuid())
+  entryId   String
+  order     Int
+  question  String
+  answer    String
+  wordCount Int
+  createdAt DateTime @default(now())
+
+  entry CompetitionEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+
+  @@unique([entryId, order])
 }
 
 model Vote {

@@ -1,21 +1,25 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { ThemeProvider, ThemeScript } from "@/components/theme-provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "GlamWorld",
-  description: "The world stage for beauty pageants",
+  title: "GlamWorldFace — Where Beauty Meets Brilliance",
+  description:
+    "A global stage for every dream. Competition-based beauty pageant platform powered by human + AI judges.",
 };
 
 export const dynamic = "force-dynamic";
@@ -28,11 +32,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${inter.variable} ${playfair.variable} h-full antialiased`}
     >
+      <head>
+        <ThemeScript />
+      </head>
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        {children}
+        <ThemeProvider defaultTheme="dark">
+          <Navbar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

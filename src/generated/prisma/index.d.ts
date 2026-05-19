@@ -54,6 +54,11 @@ export type Competition = $Result.DefaultSelection<Prisma.$CompetitionPayload>
  */
 export type CompetitionEntry = $Result.DefaultSelection<Prisma.$CompetitionEntryPayload>
 /**
+ * Model EntryAnswer
+ * 
+ */
+export type EntryAnswer = $Result.DefaultSelection<Prisma.$EntryAnswerPayload>
+/**
  * Model Vote
  * 
  */
@@ -332,6 +337,16 @@ export class PrismaClient<
     * ```
     */
   get competitionEntry(): Prisma.CompetitionEntryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.entryAnswer`: Exposes CRUD operations for the **EntryAnswer** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EntryAnswers
+    * const entryAnswers = await prisma.entryAnswer.findMany()
+    * ```
+    */
+  get entryAnswer(): Prisma.EntryAnswerDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.vote`: Exposes CRUD operations for the **Vote** model.
@@ -794,6 +809,7 @@ export namespace Prisma {
     ContestantImage: 'ContestantImage',
     Competition: 'Competition',
     CompetitionEntry: 'CompetitionEntry',
+    EntryAnswer: 'EntryAnswer',
     Vote: 'Vote',
     ScoreResult: 'ScoreResult'
   };
@@ -811,7 +827,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "contestant" | "contestantImage" | "competition" | "competitionEntry" | "vote" | "scoreResult"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "contestant" | "contestantImage" | "competition" | "competitionEntry" | "entryAnswer" | "vote" | "scoreResult"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1407,6 +1423,80 @@ export namespace Prisma {
           }
         }
       }
+      EntryAnswer: {
+        payload: Prisma.$EntryAnswerPayload<ExtArgs>
+        fields: Prisma.EntryAnswerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EntryAnswerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntryAnswerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EntryAnswerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntryAnswerPayload>
+          }
+          findFirst: {
+            args: Prisma.EntryAnswerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntryAnswerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EntryAnswerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntryAnswerPayload>
+          }
+          findMany: {
+            args: Prisma.EntryAnswerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntryAnswerPayload>[]
+          }
+          create: {
+            args: Prisma.EntryAnswerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntryAnswerPayload>
+          }
+          createMany: {
+            args: Prisma.EntryAnswerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EntryAnswerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntryAnswerPayload>[]
+          }
+          delete: {
+            args: Prisma.EntryAnswerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntryAnswerPayload>
+          }
+          update: {
+            args: Prisma.EntryAnswerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntryAnswerPayload>
+          }
+          deleteMany: {
+            args: Prisma.EntryAnswerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EntryAnswerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EntryAnswerUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntryAnswerPayload>[]
+          }
+          upsert: {
+            args: Prisma.EntryAnswerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntryAnswerPayload>
+          }
+          aggregate: {
+            args: Prisma.EntryAnswerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEntryAnswer>
+          }
+          groupBy: {
+            args: Prisma.EntryAnswerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EntryAnswerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EntryAnswerCountArgs<ExtArgs>
+            result: $Utils.Optional<EntryAnswerCountAggregateOutputType> | number
+          }
+        }
+      }
       Vote: {
         payload: Prisma.$VotePayload<ExtArgs>
         fields: Prisma.VoteFieldRefs
@@ -1671,6 +1761,7 @@ export namespace Prisma {
     contestantImage?: ContestantImageOmit
     competition?: CompetitionOmit
     competitionEntry?: CompetitionEntryOmit
+    entryAnswer?: EntryAnswerOmit
     vote?: VoteOmit
     scoreResult?: ScoreResultOmit
   }
@@ -1874,6 +1965,37 @@ export namespace Prisma {
    */
   export type CompetitionCountOutputTypeCountVotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: VoteWhereInput
+  }
+
+
+  /**
+   * Count Type CompetitionEntryCountOutputType
+   */
+
+  export type CompetitionEntryCountOutputType = {
+    answers: number
+  }
+
+  export type CompetitionEntryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    answers?: boolean | CompetitionEntryCountOutputTypeCountAnswersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CompetitionEntryCountOutputType without action
+   */
+  export type CompetitionEntryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompetitionEntryCountOutputType
+     */
+    select?: CompetitionEntryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CompetitionEntryCountOutputType without action
+   */
+  export type CompetitionEntryCountOutputTypeCountAnswersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EntryAnswerWhereInput
   }
 
 
@@ -6314,9 +6436,14 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     fullName: string | null
+    dateOfBirth: Date | null
     age: number | null
     gender: string | null
     country: string | null
+    city: string | null
+    phone: string | null
+    occupation: string | null
+    experience: string | null
     height: Decimal | null
     weight: Decimal | null
     bodyType: string | null
@@ -6327,15 +6454,21 @@ export namespace Prisma {
     portfolioUrl: string | null
     profileImage: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ContestantMaxAggregateOutputType = {
     id: string | null
     userId: string | null
     fullName: string | null
+    dateOfBirth: Date | null
     age: number | null
     gender: string | null
     country: string | null
+    city: string | null
+    phone: string | null
+    occupation: string | null
+    experience: string | null
     height: Decimal | null
     weight: Decimal | null
     bodyType: string | null
@@ -6346,15 +6479,21 @@ export namespace Prisma {
     portfolioUrl: string | null
     profileImage: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ContestantCountAggregateOutputType = {
     id: number
     userId: number
     fullName: number
+    dateOfBirth: number
     age: number
     gender: number
     country: number
+    city: number
+    phone: number
+    occupation: number
+    experience: number
     height: number
     weight: number
     bodyType: number
@@ -6365,6 +6504,7 @@ export namespace Prisma {
     portfolioUrl: number
     profileImage: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -6385,9 +6525,14 @@ export namespace Prisma {
     id?: true
     userId?: true
     fullName?: true
+    dateOfBirth?: true
     age?: true
     gender?: true
     country?: true
+    city?: true
+    phone?: true
+    occupation?: true
+    experience?: true
     height?: true
     weight?: true
     bodyType?: true
@@ -6398,15 +6543,21 @@ export namespace Prisma {
     portfolioUrl?: true
     profileImage?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type ContestantMaxAggregateInputType = {
     id?: true
     userId?: true
     fullName?: true
+    dateOfBirth?: true
     age?: true
     gender?: true
     country?: true
+    city?: true
+    phone?: true
+    occupation?: true
+    experience?: true
     height?: true
     weight?: true
     bodyType?: true
@@ -6417,15 +6568,21 @@ export namespace Prisma {
     portfolioUrl?: true
     profileImage?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type ContestantCountAggregateInputType = {
     id?: true
     userId?: true
     fullName?: true
+    dateOfBirth?: true
     age?: true
     gender?: true
     country?: true
+    city?: true
+    phone?: true
+    occupation?: true
+    experience?: true
     height?: true
     weight?: true
     bodyType?: true
@@ -6436,6 +6593,7 @@ export namespace Prisma {
     portfolioUrl?: true
     profileImage?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -6529,19 +6687,25 @@ export namespace Prisma {
     id: string
     userId: string
     fullName: string
-    age: number
-    gender: string
-    country: string
-    height: Decimal
-    weight: Decimal
-    bodyType: string
-    eyeColor: string
-    hairColor: string
-    bio: string
+    dateOfBirth: Date | null
+    age: number | null
+    gender: string | null
+    country: string | null
+    city: string | null
+    phone: string | null
+    occupation: string | null
+    experience: string | null
+    height: Decimal | null
+    weight: Decimal | null
+    bodyType: string | null
+    eyeColor: string | null
+    hairColor: string | null
+    bio: string | null
     instagram: string | null
     portfolioUrl: string | null
     profileImage: string | null
     createdAt: Date
+    updatedAt: Date
     _count: ContestantCountAggregateOutputType | null
     _avg: ContestantAvgAggregateOutputType | null
     _sum: ContestantSumAggregateOutputType | null
@@ -6567,9 +6731,14 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     fullName?: boolean
+    dateOfBirth?: boolean
     age?: boolean
     gender?: boolean
     country?: boolean
+    city?: boolean
+    phone?: boolean
+    occupation?: boolean
+    experience?: boolean
     height?: boolean
     weight?: boolean
     bodyType?: boolean
@@ -6580,6 +6749,7 @@ export namespace Prisma {
     portfolioUrl?: boolean
     profileImage?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     images?: boolean | Contestant$imagesArgs<ExtArgs>
     entries?: boolean | Contestant$entriesArgs<ExtArgs>
@@ -6590,9 +6760,14 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     fullName?: boolean
+    dateOfBirth?: boolean
     age?: boolean
     gender?: boolean
     country?: boolean
+    city?: boolean
+    phone?: boolean
+    occupation?: boolean
+    experience?: boolean
     height?: boolean
     weight?: boolean
     bodyType?: boolean
@@ -6603,6 +6778,7 @@ export namespace Prisma {
     portfolioUrl?: boolean
     profileImage?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contestant"]>
 
@@ -6610,9 +6786,14 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     fullName?: boolean
+    dateOfBirth?: boolean
     age?: boolean
     gender?: boolean
     country?: boolean
+    city?: boolean
+    phone?: boolean
+    occupation?: boolean
+    experience?: boolean
     height?: boolean
     weight?: boolean
     bodyType?: boolean
@@ -6623,6 +6804,7 @@ export namespace Prisma {
     portfolioUrl?: boolean
     profileImage?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contestant"]>
 
@@ -6630,9 +6812,14 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     fullName?: boolean
+    dateOfBirth?: boolean
     age?: boolean
     gender?: boolean
     country?: boolean
+    city?: boolean
+    phone?: boolean
+    occupation?: boolean
+    experience?: boolean
     height?: boolean
     weight?: boolean
     bodyType?: boolean
@@ -6643,9 +6830,10 @@ export namespace Prisma {
     portfolioUrl?: boolean
     profileImage?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type ContestantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "fullName" | "age" | "gender" | "country" | "height" | "weight" | "bodyType" | "eyeColor" | "hairColor" | "bio" | "instagram" | "portfolioUrl" | "profileImage" | "createdAt", ExtArgs["result"]["contestant"]>
+  export type ContestantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "fullName" | "dateOfBirth" | "age" | "gender" | "country" | "city" | "phone" | "occupation" | "experience" | "height" | "weight" | "bodyType" | "eyeColor" | "hairColor" | "bio" | "instagram" | "portfolioUrl" | "profileImage" | "createdAt" | "updatedAt", ExtArgs["result"]["contestant"]>
   export type ContestantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     images?: boolean | Contestant$imagesArgs<ExtArgs>
@@ -6670,19 +6858,25 @@ export namespace Prisma {
       id: string
       userId: string
       fullName: string
-      age: number
-      gender: string
-      country: string
-      height: Prisma.Decimal
-      weight: Prisma.Decimal
-      bodyType: string
-      eyeColor: string
-      hairColor: string
-      bio: string
+      dateOfBirth: Date | null
+      age: number | null
+      gender: string | null
+      country: string | null
+      city: string | null
+      phone: string | null
+      occupation: string | null
+      experience: string | null
+      height: Prisma.Decimal | null
+      weight: Prisma.Decimal | null
+      bodyType: string | null
+      eyeColor: string | null
+      hairColor: string | null
+      bio: string | null
       instagram: string | null
       portfolioUrl: string | null
       profileImage: string | null
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["contestant"]>
     composites: {}
   }
@@ -7112,9 +7306,14 @@ export namespace Prisma {
     readonly id: FieldRef<"Contestant", 'String'>
     readonly userId: FieldRef<"Contestant", 'String'>
     readonly fullName: FieldRef<"Contestant", 'String'>
+    readonly dateOfBirth: FieldRef<"Contestant", 'DateTime'>
     readonly age: FieldRef<"Contestant", 'Int'>
     readonly gender: FieldRef<"Contestant", 'String'>
     readonly country: FieldRef<"Contestant", 'String'>
+    readonly city: FieldRef<"Contestant", 'String'>
+    readonly phone: FieldRef<"Contestant", 'String'>
+    readonly occupation: FieldRef<"Contestant", 'String'>
+    readonly experience: FieldRef<"Contestant", 'String'>
     readonly height: FieldRef<"Contestant", 'Decimal'>
     readonly weight: FieldRef<"Contestant", 'Decimal'>
     readonly bodyType: FieldRef<"Contestant", 'String'>
@@ -7125,6 +7324,7 @@ export namespace Prisma {
     readonly portfolioUrl: FieldRef<"Contestant", 'String'>
     readonly profileImage: FieldRef<"Contestant", 'String'>
     readonly createdAt: FieldRef<"Contestant", 'DateTime'>
+    readonly updatedAt: FieldRef<"Contestant", 'DateTime'>
   }
     
 
@@ -8673,6 +8873,8 @@ export namespace Prisma {
     startDate: Date | null
     endDate: Date | null
     status: $Enums.CompetitionStatus | null
+    bannerImage: string | null
+    prizePool: string | null
     createdAt: Date | null
   }
 
@@ -8684,6 +8886,8 @@ export namespace Prisma {
     startDate: Date | null
     endDate: Date | null
     status: $Enums.CompetitionStatus | null
+    bannerImage: string | null
+    prizePool: string | null
     createdAt: Date | null
   }
 
@@ -8695,6 +8899,9 @@ export namespace Prisma {
     startDate: number
     endDate: number
     status: number
+    bannerImage: number
+    prizePool: number
+    questions: number
     createdAt: number
     _all: number
   }
@@ -8708,6 +8915,8 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     status?: true
+    bannerImage?: true
+    prizePool?: true
     createdAt?: true
   }
 
@@ -8719,6 +8928,8 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     status?: true
+    bannerImage?: true
+    prizePool?: true
     createdAt?: true
   }
 
@@ -8730,6 +8941,9 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     status?: true
+    bannerImage?: true
+    prizePool?: true
+    questions?: true
     createdAt?: true
     _all?: true
   }
@@ -8814,6 +9028,9 @@ export namespace Prisma {
     startDate: Date
     endDate: Date
     status: $Enums.CompetitionStatus
+    bannerImage: string | null
+    prizePool: string | null
+    questions: string[]
     createdAt: Date
     _count: CompetitionCountAggregateOutputType | null
     _min: CompetitionMinAggregateOutputType | null
@@ -8842,6 +9059,9 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     status?: boolean
+    bannerImage?: boolean
+    prizePool?: boolean
+    questions?: boolean
     createdAt?: boolean
     entries?: boolean | Competition$entriesArgs<ExtArgs>
     votes?: boolean | Competition$votesArgs<ExtArgs>
@@ -8856,6 +9076,9 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     status?: boolean
+    bannerImage?: boolean
+    prizePool?: boolean
+    questions?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["competition"]>
 
@@ -8867,6 +9090,9 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     status?: boolean
+    bannerImage?: boolean
+    prizePool?: boolean
+    questions?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["competition"]>
 
@@ -8878,10 +9104,13 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     status?: boolean
+    bannerImage?: boolean
+    prizePool?: boolean
+    questions?: boolean
     createdAt?: boolean
   }
 
-  export type CompetitionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "competitionType" | "startDate" | "endDate" | "status" | "createdAt", ExtArgs["result"]["competition"]>
+  export type CompetitionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "competitionType" | "startDate" | "endDate" | "status" | "bannerImage" | "prizePool" | "questions" | "createdAt", ExtArgs["result"]["competition"]>
   export type CompetitionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     entries?: boolean | Competition$entriesArgs<ExtArgs>
     votes?: boolean | Competition$votesArgs<ExtArgs>
@@ -8904,6 +9133,9 @@ export namespace Prisma {
       startDate: Date
       endDate: Date
       status: $Enums.CompetitionStatus
+      bannerImage: string | null
+      prizePool: string | null
+      questions: string[]
       createdAt: Date
     }, ExtArgs["result"]["competition"]>
     composites: {}
@@ -9337,6 +9569,9 @@ export namespace Prisma {
     readonly startDate: FieldRef<"Competition", 'DateTime'>
     readonly endDate: FieldRef<"Competition", 'DateTime'>
     readonly status: FieldRef<"Competition", 'CompetitionStatus'>
+    readonly bannerImage: FieldRef<"Competition", 'String'>
+    readonly prizePool: FieldRef<"Competition", 'String'>
+    readonly questions: FieldRef<"Competition", 'String[]'>
     readonly createdAt: FieldRef<"Competition", 'DateTime'>
   }
     
@@ -9829,6 +10064,7 @@ export namespace Prisma {
     overallScore: Decimal | null
     voteCount: number | null
     rank: number | null
+    submittedAt: Date | null
     createdAt: Date | null
   }
 
@@ -9840,6 +10076,7 @@ export namespace Prisma {
     overallScore: Decimal | null
     voteCount: number | null
     rank: number | null
+    submittedAt: Date | null
     createdAt: Date | null
   }
 
@@ -9851,6 +10088,7 @@ export namespace Prisma {
     overallScore: number
     voteCount: number
     rank: number
+    submittedAt: number
     createdAt: number
     _all: number
   }
@@ -9876,6 +10114,7 @@ export namespace Prisma {
     overallScore?: true
     voteCount?: true
     rank?: true
+    submittedAt?: true
     createdAt?: true
   }
 
@@ -9887,6 +10126,7 @@ export namespace Prisma {
     overallScore?: true
     voteCount?: true
     rank?: true
+    submittedAt?: true
     createdAt?: true
   }
 
@@ -9898,6 +10138,7 @@ export namespace Prisma {
     overallScore?: true
     voteCount?: true
     rank?: true
+    submittedAt?: true
     createdAt?: true
     _all?: true
   }
@@ -9996,6 +10237,7 @@ export namespace Prisma {
     overallScore: Decimal | null
     voteCount: number
     rank: number | null
+    submittedAt: Date | null
     createdAt: Date
     _count: CompetitionEntryCountAggregateOutputType | null
     _avg: CompetitionEntryAvgAggregateOutputType | null
@@ -10026,10 +10268,13 @@ export namespace Prisma {
     overallScore?: boolean
     voteCount?: boolean
     rank?: boolean
+    submittedAt?: boolean
     createdAt?: boolean
     competition?: boolean | CompetitionDefaultArgs<ExtArgs>
     contestant?: boolean | ContestantDefaultArgs<ExtArgs>
     scoreResult?: boolean | CompetitionEntry$scoreResultArgs<ExtArgs>
+    answers?: boolean | CompetitionEntry$answersArgs<ExtArgs>
+    _count?: boolean | CompetitionEntryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["competitionEntry"]>
 
   export type CompetitionEntrySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10040,6 +10285,7 @@ export namespace Prisma {
     overallScore?: boolean
     voteCount?: boolean
     rank?: boolean
+    submittedAt?: boolean
     createdAt?: boolean
     competition?: boolean | CompetitionDefaultArgs<ExtArgs>
     contestant?: boolean | ContestantDefaultArgs<ExtArgs>
@@ -10053,6 +10299,7 @@ export namespace Prisma {
     overallScore?: boolean
     voteCount?: boolean
     rank?: boolean
+    submittedAt?: boolean
     createdAt?: boolean
     competition?: boolean | CompetitionDefaultArgs<ExtArgs>
     contestant?: boolean | ContestantDefaultArgs<ExtArgs>
@@ -10066,14 +10313,17 @@ export namespace Prisma {
     overallScore?: boolean
     voteCount?: boolean
     rank?: boolean
+    submittedAt?: boolean
     createdAt?: boolean
   }
 
-  export type CompetitionEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "competitionId" | "contestantId" | "status" | "overallScore" | "voteCount" | "rank" | "createdAt", ExtArgs["result"]["competitionEntry"]>
+  export type CompetitionEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "competitionId" | "contestantId" | "status" | "overallScore" | "voteCount" | "rank" | "submittedAt" | "createdAt", ExtArgs["result"]["competitionEntry"]>
   export type CompetitionEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     competition?: boolean | CompetitionDefaultArgs<ExtArgs>
     contestant?: boolean | ContestantDefaultArgs<ExtArgs>
     scoreResult?: boolean | CompetitionEntry$scoreResultArgs<ExtArgs>
+    answers?: boolean | CompetitionEntry$answersArgs<ExtArgs>
+    _count?: boolean | CompetitionEntryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CompetitionEntryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     competition?: boolean | CompetitionDefaultArgs<ExtArgs>
@@ -10090,6 +10340,7 @@ export namespace Prisma {
       competition: Prisma.$CompetitionPayload<ExtArgs>
       contestant: Prisma.$ContestantPayload<ExtArgs>
       scoreResult: Prisma.$ScoreResultPayload<ExtArgs> | null
+      answers: Prisma.$EntryAnswerPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10099,6 +10350,7 @@ export namespace Prisma {
       overallScore: Prisma.Decimal | null
       voteCount: number
       rank: number | null
+      submittedAt: Date | null
       createdAt: Date
     }, ExtArgs["result"]["competitionEntry"]>
     composites: {}
@@ -10497,6 +10749,7 @@ export namespace Prisma {
     competition<T extends CompetitionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompetitionDefaultArgs<ExtArgs>>): Prisma__CompetitionClient<$Result.GetResult<Prisma.$CompetitionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     contestant<T extends ContestantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContestantDefaultArgs<ExtArgs>>): Prisma__ContestantClient<$Result.GetResult<Prisma.$ContestantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     scoreResult<T extends CompetitionEntry$scoreResultArgs<ExtArgs> = {}>(args?: Subset<T, CompetitionEntry$scoreResultArgs<ExtArgs>>): Prisma__ScoreResultClient<$Result.GetResult<Prisma.$ScoreResultPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    answers<T extends CompetitionEntry$answersArgs<ExtArgs> = {}>(args?: Subset<T, CompetitionEntry$answersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EntryAnswerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10533,6 +10786,7 @@ export namespace Prisma {
     readonly overallScore: FieldRef<"CompetitionEntry", 'Decimal'>
     readonly voteCount: FieldRef<"CompetitionEntry", 'Int'>
     readonly rank: FieldRef<"CompetitionEntry", 'Int'>
+    readonly submittedAt: FieldRef<"CompetitionEntry", 'DateTime'>
     readonly createdAt: FieldRef<"CompetitionEntry", 'DateTime'>
   }
     
@@ -10954,6 +11208,30 @@ export namespace Prisma {
   }
 
   /**
+   * CompetitionEntry.answers
+   */
+  export type CompetitionEntry$answersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryAnswer
+     */
+    select?: EntryAnswerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EntryAnswer
+     */
+    omit?: EntryAnswerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntryAnswerInclude<ExtArgs> | null
+    where?: EntryAnswerWhereInput
+    orderBy?: EntryAnswerOrderByWithRelationInput | EntryAnswerOrderByWithRelationInput[]
+    cursor?: EntryAnswerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EntryAnswerScalarFieldEnum | EntryAnswerScalarFieldEnum[]
+  }
+
+  /**
    * CompetitionEntry without action
    */
   export type CompetitionEntryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10969,6 +11247,1133 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: CompetitionEntryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EntryAnswer
+   */
+
+  export type AggregateEntryAnswer = {
+    _count: EntryAnswerCountAggregateOutputType | null
+    _avg: EntryAnswerAvgAggregateOutputType | null
+    _sum: EntryAnswerSumAggregateOutputType | null
+    _min: EntryAnswerMinAggregateOutputType | null
+    _max: EntryAnswerMaxAggregateOutputType | null
+  }
+
+  export type EntryAnswerAvgAggregateOutputType = {
+    order: number | null
+    wordCount: number | null
+  }
+
+  export type EntryAnswerSumAggregateOutputType = {
+    order: number | null
+    wordCount: number | null
+  }
+
+  export type EntryAnswerMinAggregateOutputType = {
+    id: string | null
+    entryId: string | null
+    order: number | null
+    question: string | null
+    answer: string | null
+    wordCount: number | null
+    createdAt: Date | null
+  }
+
+  export type EntryAnswerMaxAggregateOutputType = {
+    id: string | null
+    entryId: string | null
+    order: number | null
+    question: string | null
+    answer: string | null
+    wordCount: number | null
+    createdAt: Date | null
+  }
+
+  export type EntryAnswerCountAggregateOutputType = {
+    id: number
+    entryId: number
+    order: number
+    question: number
+    answer: number
+    wordCount: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type EntryAnswerAvgAggregateInputType = {
+    order?: true
+    wordCount?: true
+  }
+
+  export type EntryAnswerSumAggregateInputType = {
+    order?: true
+    wordCount?: true
+  }
+
+  export type EntryAnswerMinAggregateInputType = {
+    id?: true
+    entryId?: true
+    order?: true
+    question?: true
+    answer?: true
+    wordCount?: true
+    createdAt?: true
+  }
+
+  export type EntryAnswerMaxAggregateInputType = {
+    id?: true
+    entryId?: true
+    order?: true
+    question?: true
+    answer?: true
+    wordCount?: true
+    createdAt?: true
+  }
+
+  export type EntryAnswerCountAggregateInputType = {
+    id?: true
+    entryId?: true
+    order?: true
+    question?: true
+    answer?: true
+    wordCount?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type EntryAnswerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EntryAnswer to aggregate.
+     */
+    where?: EntryAnswerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EntryAnswers to fetch.
+     */
+    orderBy?: EntryAnswerOrderByWithRelationInput | EntryAnswerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EntryAnswerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EntryAnswers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EntryAnswers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EntryAnswers
+    **/
+    _count?: true | EntryAnswerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EntryAnswerAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EntryAnswerSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EntryAnswerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EntryAnswerMaxAggregateInputType
+  }
+
+  export type GetEntryAnswerAggregateType<T extends EntryAnswerAggregateArgs> = {
+        [P in keyof T & keyof AggregateEntryAnswer]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEntryAnswer[P]>
+      : GetScalarType<T[P], AggregateEntryAnswer[P]>
+  }
+
+
+
+
+  export type EntryAnswerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EntryAnswerWhereInput
+    orderBy?: EntryAnswerOrderByWithAggregationInput | EntryAnswerOrderByWithAggregationInput[]
+    by: EntryAnswerScalarFieldEnum[] | EntryAnswerScalarFieldEnum
+    having?: EntryAnswerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EntryAnswerCountAggregateInputType | true
+    _avg?: EntryAnswerAvgAggregateInputType
+    _sum?: EntryAnswerSumAggregateInputType
+    _min?: EntryAnswerMinAggregateInputType
+    _max?: EntryAnswerMaxAggregateInputType
+  }
+
+  export type EntryAnswerGroupByOutputType = {
+    id: string
+    entryId: string
+    order: number
+    question: string
+    answer: string
+    wordCount: number
+    createdAt: Date
+    _count: EntryAnswerCountAggregateOutputType | null
+    _avg: EntryAnswerAvgAggregateOutputType | null
+    _sum: EntryAnswerSumAggregateOutputType | null
+    _min: EntryAnswerMinAggregateOutputType | null
+    _max: EntryAnswerMaxAggregateOutputType | null
+  }
+
+  type GetEntryAnswerGroupByPayload<T extends EntryAnswerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EntryAnswerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EntryAnswerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EntryAnswerGroupByOutputType[P]>
+            : GetScalarType<T[P], EntryAnswerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EntryAnswerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    entryId?: boolean
+    order?: boolean
+    question?: boolean
+    answer?: boolean
+    wordCount?: boolean
+    createdAt?: boolean
+    entry?: boolean | CompetitionEntryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["entryAnswer"]>
+
+  export type EntryAnswerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    entryId?: boolean
+    order?: boolean
+    question?: boolean
+    answer?: boolean
+    wordCount?: boolean
+    createdAt?: boolean
+    entry?: boolean | CompetitionEntryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["entryAnswer"]>
+
+  export type EntryAnswerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    entryId?: boolean
+    order?: boolean
+    question?: boolean
+    answer?: boolean
+    wordCount?: boolean
+    createdAt?: boolean
+    entry?: boolean | CompetitionEntryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["entryAnswer"]>
+
+  export type EntryAnswerSelectScalar = {
+    id?: boolean
+    entryId?: boolean
+    order?: boolean
+    question?: boolean
+    answer?: boolean
+    wordCount?: boolean
+    createdAt?: boolean
+  }
+
+  export type EntryAnswerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "entryId" | "order" | "question" | "answer" | "wordCount" | "createdAt", ExtArgs["result"]["entryAnswer"]>
+  export type EntryAnswerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    entry?: boolean | CompetitionEntryDefaultArgs<ExtArgs>
+  }
+  export type EntryAnswerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    entry?: boolean | CompetitionEntryDefaultArgs<ExtArgs>
+  }
+  export type EntryAnswerIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    entry?: boolean | CompetitionEntryDefaultArgs<ExtArgs>
+  }
+
+  export type $EntryAnswerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EntryAnswer"
+    objects: {
+      entry: Prisma.$CompetitionEntryPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      entryId: string
+      order: number
+      question: string
+      answer: string
+      wordCount: number
+      createdAt: Date
+    }, ExtArgs["result"]["entryAnswer"]>
+    composites: {}
+  }
+
+  type EntryAnswerGetPayload<S extends boolean | null | undefined | EntryAnswerDefaultArgs> = $Result.GetResult<Prisma.$EntryAnswerPayload, S>
+
+  type EntryAnswerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EntryAnswerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EntryAnswerCountAggregateInputType | true
+    }
+
+  export interface EntryAnswerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EntryAnswer'], meta: { name: 'EntryAnswer' } }
+    /**
+     * Find zero or one EntryAnswer that matches the filter.
+     * @param {EntryAnswerFindUniqueArgs} args - Arguments to find a EntryAnswer
+     * @example
+     * // Get one EntryAnswer
+     * const entryAnswer = await prisma.entryAnswer.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EntryAnswerFindUniqueArgs>(args: SelectSubset<T, EntryAnswerFindUniqueArgs<ExtArgs>>): Prisma__EntryAnswerClient<$Result.GetResult<Prisma.$EntryAnswerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EntryAnswer that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EntryAnswerFindUniqueOrThrowArgs} args - Arguments to find a EntryAnswer
+     * @example
+     * // Get one EntryAnswer
+     * const entryAnswer = await prisma.entryAnswer.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EntryAnswerFindUniqueOrThrowArgs>(args: SelectSubset<T, EntryAnswerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EntryAnswerClient<$Result.GetResult<Prisma.$EntryAnswerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EntryAnswer that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntryAnswerFindFirstArgs} args - Arguments to find a EntryAnswer
+     * @example
+     * // Get one EntryAnswer
+     * const entryAnswer = await prisma.entryAnswer.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EntryAnswerFindFirstArgs>(args?: SelectSubset<T, EntryAnswerFindFirstArgs<ExtArgs>>): Prisma__EntryAnswerClient<$Result.GetResult<Prisma.$EntryAnswerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EntryAnswer that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntryAnswerFindFirstOrThrowArgs} args - Arguments to find a EntryAnswer
+     * @example
+     * // Get one EntryAnswer
+     * const entryAnswer = await prisma.entryAnswer.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EntryAnswerFindFirstOrThrowArgs>(args?: SelectSubset<T, EntryAnswerFindFirstOrThrowArgs<ExtArgs>>): Prisma__EntryAnswerClient<$Result.GetResult<Prisma.$EntryAnswerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EntryAnswers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntryAnswerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EntryAnswers
+     * const entryAnswers = await prisma.entryAnswer.findMany()
+     * 
+     * // Get first 10 EntryAnswers
+     * const entryAnswers = await prisma.entryAnswer.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const entryAnswerWithIdOnly = await prisma.entryAnswer.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EntryAnswerFindManyArgs>(args?: SelectSubset<T, EntryAnswerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EntryAnswerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EntryAnswer.
+     * @param {EntryAnswerCreateArgs} args - Arguments to create a EntryAnswer.
+     * @example
+     * // Create one EntryAnswer
+     * const EntryAnswer = await prisma.entryAnswer.create({
+     *   data: {
+     *     // ... data to create a EntryAnswer
+     *   }
+     * })
+     * 
+     */
+    create<T extends EntryAnswerCreateArgs>(args: SelectSubset<T, EntryAnswerCreateArgs<ExtArgs>>): Prisma__EntryAnswerClient<$Result.GetResult<Prisma.$EntryAnswerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EntryAnswers.
+     * @param {EntryAnswerCreateManyArgs} args - Arguments to create many EntryAnswers.
+     * @example
+     * // Create many EntryAnswers
+     * const entryAnswer = await prisma.entryAnswer.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EntryAnswerCreateManyArgs>(args?: SelectSubset<T, EntryAnswerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EntryAnswers and returns the data saved in the database.
+     * @param {EntryAnswerCreateManyAndReturnArgs} args - Arguments to create many EntryAnswers.
+     * @example
+     * // Create many EntryAnswers
+     * const entryAnswer = await prisma.entryAnswer.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EntryAnswers and only return the `id`
+     * const entryAnswerWithIdOnly = await prisma.entryAnswer.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EntryAnswerCreateManyAndReturnArgs>(args?: SelectSubset<T, EntryAnswerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EntryAnswerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EntryAnswer.
+     * @param {EntryAnswerDeleteArgs} args - Arguments to delete one EntryAnswer.
+     * @example
+     * // Delete one EntryAnswer
+     * const EntryAnswer = await prisma.entryAnswer.delete({
+     *   where: {
+     *     // ... filter to delete one EntryAnswer
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EntryAnswerDeleteArgs>(args: SelectSubset<T, EntryAnswerDeleteArgs<ExtArgs>>): Prisma__EntryAnswerClient<$Result.GetResult<Prisma.$EntryAnswerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EntryAnswer.
+     * @param {EntryAnswerUpdateArgs} args - Arguments to update one EntryAnswer.
+     * @example
+     * // Update one EntryAnswer
+     * const entryAnswer = await prisma.entryAnswer.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EntryAnswerUpdateArgs>(args: SelectSubset<T, EntryAnswerUpdateArgs<ExtArgs>>): Prisma__EntryAnswerClient<$Result.GetResult<Prisma.$EntryAnswerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EntryAnswers.
+     * @param {EntryAnswerDeleteManyArgs} args - Arguments to filter EntryAnswers to delete.
+     * @example
+     * // Delete a few EntryAnswers
+     * const { count } = await prisma.entryAnswer.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EntryAnswerDeleteManyArgs>(args?: SelectSubset<T, EntryAnswerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EntryAnswers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntryAnswerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EntryAnswers
+     * const entryAnswer = await prisma.entryAnswer.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EntryAnswerUpdateManyArgs>(args: SelectSubset<T, EntryAnswerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EntryAnswers and returns the data updated in the database.
+     * @param {EntryAnswerUpdateManyAndReturnArgs} args - Arguments to update many EntryAnswers.
+     * @example
+     * // Update many EntryAnswers
+     * const entryAnswer = await prisma.entryAnswer.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EntryAnswers and only return the `id`
+     * const entryAnswerWithIdOnly = await prisma.entryAnswer.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EntryAnswerUpdateManyAndReturnArgs>(args: SelectSubset<T, EntryAnswerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EntryAnswerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EntryAnswer.
+     * @param {EntryAnswerUpsertArgs} args - Arguments to update or create a EntryAnswer.
+     * @example
+     * // Update or create a EntryAnswer
+     * const entryAnswer = await prisma.entryAnswer.upsert({
+     *   create: {
+     *     // ... data to create a EntryAnswer
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EntryAnswer we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EntryAnswerUpsertArgs>(args: SelectSubset<T, EntryAnswerUpsertArgs<ExtArgs>>): Prisma__EntryAnswerClient<$Result.GetResult<Prisma.$EntryAnswerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EntryAnswers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntryAnswerCountArgs} args - Arguments to filter EntryAnswers to count.
+     * @example
+     * // Count the number of EntryAnswers
+     * const count = await prisma.entryAnswer.count({
+     *   where: {
+     *     // ... the filter for the EntryAnswers we want to count
+     *   }
+     * })
+    **/
+    count<T extends EntryAnswerCountArgs>(
+      args?: Subset<T, EntryAnswerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EntryAnswerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EntryAnswer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntryAnswerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EntryAnswerAggregateArgs>(args: Subset<T, EntryAnswerAggregateArgs>): Prisma.PrismaPromise<GetEntryAnswerAggregateType<T>>
+
+    /**
+     * Group by EntryAnswer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntryAnswerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EntryAnswerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EntryAnswerGroupByArgs['orderBy'] }
+        : { orderBy?: EntryAnswerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EntryAnswerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEntryAnswerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EntryAnswer model
+   */
+  readonly fields: EntryAnswerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EntryAnswer.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EntryAnswerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    entry<T extends CompetitionEntryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompetitionEntryDefaultArgs<ExtArgs>>): Prisma__CompetitionEntryClient<$Result.GetResult<Prisma.$CompetitionEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EntryAnswer model
+   */
+  interface EntryAnswerFieldRefs {
+    readonly id: FieldRef<"EntryAnswer", 'String'>
+    readonly entryId: FieldRef<"EntryAnswer", 'String'>
+    readonly order: FieldRef<"EntryAnswer", 'Int'>
+    readonly question: FieldRef<"EntryAnswer", 'String'>
+    readonly answer: FieldRef<"EntryAnswer", 'String'>
+    readonly wordCount: FieldRef<"EntryAnswer", 'Int'>
+    readonly createdAt: FieldRef<"EntryAnswer", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EntryAnswer findUnique
+   */
+  export type EntryAnswerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryAnswer
+     */
+    select?: EntryAnswerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EntryAnswer
+     */
+    omit?: EntryAnswerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntryAnswerInclude<ExtArgs> | null
+    /**
+     * Filter, which EntryAnswer to fetch.
+     */
+    where: EntryAnswerWhereUniqueInput
+  }
+
+  /**
+   * EntryAnswer findUniqueOrThrow
+   */
+  export type EntryAnswerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryAnswer
+     */
+    select?: EntryAnswerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EntryAnswer
+     */
+    omit?: EntryAnswerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntryAnswerInclude<ExtArgs> | null
+    /**
+     * Filter, which EntryAnswer to fetch.
+     */
+    where: EntryAnswerWhereUniqueInput
+  }
+
+  /**
+   * EntryAnswer findFirst
+   */
+  export type EntryAnswerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryAnswer
+     */
+    select?: EntryAnswerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EntryAnswer
+     */
+    omit?: EntryAnswerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntryAnswerInclude<ExtArgs> | null
+    /**
+     * Filter, which EntryAnswer to fetch.
+     */
+    where?: EntryAnswerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EntryAnswers to fetch.
+     */
+    orderBy?: EntryAnswerOrderByWithRelationInput | EntryAnswerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EntryAnswers.
+     */
+    cursor?: EntryAnswerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EntryAnswers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EntryAnswers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EntryAnswers.
+     */
+    distinct?: EntryAnswerScalarFieldEnum | EntryAnswerScalarFieldEnum[]
+  }
+
+  /**
+   * EntryAnswer findFirstOrThrow
+   */
+  export type EntryAnswerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryAnswer
+     */
+    select?: EntryAnswerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EntryAnswer
+     */
+    omit?: EntryAnswerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntryAnswerInclude<ExtArgs> | null
+    /**
+     * Filter, which EntryAnswer to fetch.
+     */
+    where?: EntryAnswerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EntryAnswers to fetch.
+     */
+    orderBy?: EntryAnswerOrderByWithRelationInput | EntryAnswerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EntryAnswers.
+     */
+    cursor?: EntryAnswerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EntryAnswers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EntryAnswers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EntryAnswers.
+     */
+    distinct?: EntryAnswerScalarFieldEnum | EntryAnswerScalarFieldEnum[]
+  }
+
+  /**
+   * EntryAnswer findMany
+   */
+  export type EntryAnswerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryAnswer
+     */
+    select?: EntryAnswerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EntryAnswer
+     */
+    omit?: EntryAnswerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntryAnswerInclude<ExtArgs> | null
+    /**
+     * Filter, which EntryAnswers to fetch.
+     */
+    where?: EntryAnswerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EntryAnswers to fetch.
+     */
+    orderBy?: EntryAnswerOrderByWithRelationInput | EntryAnswerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EntryAnswers.
+     */
+    cursor?: EntryAnswerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EntryAnswers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EntryAnswers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EntryAnswers.
+     */
+    distinct?: EntryAnswerScalarFieldEnum | EntryAnswerScalarFieldEnum[]
+  }
+
+  /**
+   * EntryAnswer create
+   */
+  export type EntryAnswerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryAnswer
+     */
+    select?: EntryAnswerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EntryAnswer
+     */
+    omit?: EntryAnswerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntryAnswerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EntryAnswer.
+     */
+    data: XOR<EntryAnswerCreateInput, EntryAnswerUncheckedCreateInput>
+  }
+
+  /**
+   * EntryAnswer createMany
+   */
+  export type EntryAnswerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EntryAnswers.
+     */
+    data: EntryAnswerCreateManyInput | EntryAnswerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EntryAnswer createManyAndReturn
+   */
+  export type EntryAnswerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryAnswer
+     */
+    select?: EntryAnswerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EntryAnswer
+     */
+    omit?: EntryAnswerOmit<ExtArgs> | null
+    /**
+     * The data used to create many EntryAnswers.
+     */
+    data: EntryAnswerCreateManyInput | EntryAnswerCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntryAnswerIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EntryAnswer update
+   */
+  export type EntryAnswerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryAnswer
+     */
+    select?: EntryAnswerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EntryAnswer
+     */
+    omit?: EntryAnswerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntryAnswerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EntryAnswer.
+     */
+    data: XOR<EntryAnswerUpdateInput, EntryAnswerUncheckedUpdateInput>
+    /**
+     * Choose, which EntryAnswer to update.
+     */
+    where: EntryAnswerWhereUniqueInput
+  }
+
+  /**
+   * EntryAnswer updateMany
+   */
+  export type EntryAnswerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EntryAnswers.
+     */
+    data: XOR<EntryAnswerUpdateManyMutationInput, EntryAnswerUncheckedUpdateManyInput>
+    /**
+     * Filter which EntryAnswers to update
+     */
+    where?: EntryAnswerWhereInput
+    /**
+     * Limit how many EntryAnswers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EntryAnswer updateManyAndReturn
+   */
+  export type EntryAnswerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryAnswer
+     */
+    select?: EntryAnswerSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EntryAnswer
+     */
+    omit?: EntryAnswerOmit<ExtArgs> | null
+    /**
+     * The data used to update EntryAnswers.
+     */
+    data: XOR<EntryAnswerUpdateManyMutationInput, EntryAnswerUncheckedUpdateManyInput>
+    /**
+     * Filter which EntryAnswers to update
+     */
+    where?: EntryAnswerWhereInput
+    /**
+     * Limit how many EntryAnswers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntryAnswerIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EntryAnswer upsert
+   */
+  export type EntryAnswerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryAnswer
+     */
+    select?: EntryAnswerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EntryAnswer
+     */
+    omit?: EntryAnswerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntryAnswerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EntryAnswer to update in case it exists.
+     */
+    where: EntryAnswerWhereUniqueInput
+    /**
+     * In case the EntryAnswer found by the `where` argument doesn't exist, create a new EntryAnswer with this data.
+     */
+    create: XOR<EntryAnswerCreateInput, EntryAnswerUncheckedCreateInput>
+    /**
+     * In case the EntryAnswer was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EntryAnswerUpdateInput, EntryAnswerUncheckedUpdateInput>
+  }
+
+  /**
+   * EntryAnswer delete
+   */
+  export type EntryAnswerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryAnswer
+     */
+    select?: EntryAnswerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EntryAnswer
+     */
+    omit?: EntryAnswerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntryAnswerInclude<ExtArgs> | null
+    /**
+     * Filter which EntryAnswer to delete.
+     */
+    where: EntryAnswerWhereUniqueInput
+  }
+
+  /**
+   * EntryAnswer deleteMany
+   */
+  export type EntryAnswerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EntryAnswers to delete
+     */
+    where?: EntryAnswerWhereInput
+    /**
+     * Limit how many EntryAnswers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EntryAnswer without action
+   */
+  export type EntryAnswerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntryAnswer
+     */
+    select?: EntryAnswerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EntryAnswer
+     */
+    omit?: EntryAnswerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntryAnswerInclude<ExtArgs> | null
   }
 
 
@@ -13294,9 +14699,14 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     fullName: 'fullName',
+    dateOfBirth: 'dateOfBirth',
     age: 'age',
     gender: 'gender',
     country: 'country',
+    city: 'city',
+    phone: 'phone',
+    occupation: 'occupation',
+    experience: 'experience',
     height: 'height',
     weight: 'weight',
     bodyType: 'bodyType',
@@ -13306,7 +14716,8 @@ export namespace Prisma {
     instagram: 'instagram',
     portfolioUrl: 'portfolioUrl',
     profileImage: 'profileImage',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ContestantScalarFieldEnum = (typeof ContestantScalarFieldEnum)[keyof typeof ContestantScalarFieldEnum]
@@ -13331,6 +14742,9 @@ export namespace Prisma {
     startDate: 'startDate',
     endDate: 'endDate',
     status: 'status',
+    bannerImage: 'bannerImage',
+    prizePool: 'prizePool',
+    questions: 'questions',
     createdAt: 'createdAt'
   };
 
@@ -13345,10 +14759,24 @@ export namespace Prisma {
     overallScore: 'overallScore',
     voteCount: 'voteCount',
     rank: 'rank',
+    submittedAt: 'submittedAt',
     createdAt: 'createdAt'
   };
 
   export type CompetitionEntryScalarFieldEnum = (typeof CompetitionEntryScalarFieldEnum)[keyof typeof CompetitionEntryScalarFieldEnum]
+
+
+  export const EntryAnswerScalarFieldEnum: {
+    id: 'id',
+    entryId: 'entryId',
+    order: 'order',
+    question: 'question',
+    answer: 'answer',
+    wordCount: 'wordCount',
+    createdAt: 'createdAt'
+  };
+
+  export type EntryAnswerScalarFieldEnum = (typeof EntryAnswerScalarFieldEnum)[keyof typeof EntryAnswerScalarFieldEnum]
 
 
   export const VoteScalarFieldEnum: {
@@ -13822,19 +15250,25 @@ export namespace Prisma {
     id?: StringFilter<"Contestant"> | string
     userId?: StringFilter<"Contestant"> | string
     fullName?: StringFilter<"Contestant"> | string
-    age?: IntFilter<"Contestant"> | number
-    gender?: StringFilter<"Contestant"> | string
-    country?: StringFilter<"Contestant"> | string
-    height?: DecimalFilter<"Contestant"> | Decimal | DecimalJsLike | number | string
-    weight?: DecimalFilter<"Contestant"> | Decimal | DecimalJsLike | number | string
-    bodyType?: StringFilter<"Contestant"> | string
-    eyeColor?: StringFilter<"Contestant"> | string
-    hairColor?: StringFilter<"Contestant"> | string
-    bio?: StringFilter<"Contestant"> | string
+    dateOfBirth?: DateTimeNullableFilter<"Contestant"> | Date | string | null
+    age?: IntNullableFilter<"Contestant"> | number | null
+    gender?: StringNullableFilter<"Contestant"> | string | null
+    country?: StringNullableFilter<"Contestant"> | string | null
+    city?: StringNullableFilter<"Contestant"> | string | null
+    phone?: StringNullableFilter<"Contestant"> | string | null
+    occupation?: StringNullableFilter<"Contestant"> | string | null
+    experience?: StringNullableFilter<"Contestant"> | string | null
+    height?: DecimalNullableFilter<"Contestant"> | Decimal | DecimalJsLike | number | string | null
+    weight?: DecimalNullableFilter<"Contestant"> | Decimal | DecimalJsLike | number | string | null
+    bodyType?: StringNullableFilter<"Contestant"> | string | null
+    eyeColor?: StringNullableFilter<"Contestant"> | string | null
+    hairColor?: StringNullableFilter<"Contestant"> | string | null
+    bio?: StringNullableFilter<"Contestant"> | string | null
     instagram?: StringNullableFilter<"Contestant"> | string | null
     portfolioUrl?: StringNullableFilter<"Contestant"> | string | null
     profileImage?: StringNullableFilter<"Contestant"> | string | null
     createdAt?: DateTimeFilter<"Contestant"> | Date | string
+    updatedAt?: DateTimeFilter<"Contestant"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     images?: ContestantImageListRelationFilter
     entries?: CompetitionEntryListRelationFilter
@@ -13844,19 +15278,25 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     fullName?: SortOrder
-    age?: SortOrder
-    gender?: SortOrder
-    country?: SortOrder
-    height?: SortOrder
-    weight?: SortOrder
-    bodyType?: SortOrder
-    eyeColor?: SortOrder
-    hairColor?: SortOrder
-    bio?: SortOrder
+    dateOfBirth?: SortOrderInput | SortOrder
+    age?: SortOrderInput | SortOrder
+    gender?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    occupation?: SortOrderInput | SortOrder
+    experience?: SortOrderInput | SortOrder
+    height?: SortOrderInput | SortOrder
+    weight?: SortOrderInput | SortOrder
+    bodyType?: SortOrderInput | SortOrder
+    eyeColor?: SortOrderInput | SortOrder
+    hairColor?: SortOrderInput | SortOrder
+    bio?: SortOrderInput | SortOrder
     instagram?: SortOrderInput | SortOrder
     portfolioUrl?: SortOrderInput | SortOrder
     profileImage?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     images?: ContestantImageOrderByRelationAggregateInput
     entries?: CompetitionEntryOrderByRelationAggregateInput
@@ -13869,19 +15309,25 @@ export namespace Prisma {
     OR?: ContestantWhereInput[]
     NOT?: ContestantWhereInput | ContestantWhereInput[]
     fullName?: StringFilter<"Contestant"> | string
-    age?: IntFilter<"Contestant"> | number
-    gender?: StringFilter<"Contestant"> | string
-    country?: StringFilter<"Contestant"> | string
-    height?: DecimalFilter<"Contestant"> | Decimal | DecimalJsLike | number | string
-    weight?: DecimalFilter<"Contestant"> | Decimal | DecimalJsLike | number | string
-    bodyType?: StringFilter<"Contestant"> | string
-    eyeColor?: StringFilter<"Contestant"> | string
-    hairColor?: StringFilter<"Contestant"> | string
-    bio?: StringFilter<"Contestant"> | string
+    dateOfBirth?: DateTimeNullableFilter<"Contestant"> | Date | string | null
+    age?: IntNullableFilter<"Contestant"> | number | null
+    gender?: StringNullableFilter<"Contestant"> | string | null
+    country?: StringNullableFilter<"Contestant"> | string | null
+    city?: StringNullableFilter<"Contestant"> | string | null
+    phone?: StringNullableFilter<"Contestant"> | string | null
+    occupation?: StringNullableFilter<"Contestant"> | string | null
+    experience?: StringNullableFilter<"Contestant"> | string | null
+    height?: DecimalNullableFilter<"Contestant"> | Decimal | DecimalJsLike | number | string | null
+    weight?: DecimalNullableFilter<"Contestant"> | Decimal | DecimalJsLike | number | string | null
+    bodyType?: StringNullableFilter<"Contestant"> | string | null
+    eyeColor?: StringNullableFilter<"Contestant"> | string | null
+    hairColor?: StringNullableFilter<"Contestant"> | string | null
+    bio?: StringNullableFilter<"Contestant"> | string | null
     instagram?: StringNullableFilter<"Contestant"> | string | null
     portfolioUrl?: StringNullableFilter<"Contestant"> | string | null
     profileImage?: StringNullableFilter<"Contestant"> | string | null
     createdAt?: DateTimeFilter<"Contestant"> | Date | string
+    updatedAt?: DateTimeFilter<"Contestant"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     images?: ContestantImageListRelationFilter
     entries?: CompetitionEntryListRelationFilter
@@ -13891,19 +15337,25 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     fullName?: SortOrder
-    age?: SortOrder
-    gender?: SortOrder
-    country?: SortOrder
-    height?: SortOrder
-    weight?: SortOrder
-    bodyType?: SortOrder
-    eyeColor?: SortOrder
-    hairColor?: SortOrder
-    bio?: SortOrder
+    dateOfBirth?: SortOrderInput | SortOrder
+    age?: SortOrderInput | SortOrder
+    gender?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    occupation?: SortOrderInput | SortOrder
+    experience?: SortOrderInput | SortOrder
+    height?: SortOrderInput | SortOrder
+    weight?: SortOrderInput | SortOrder
+    bodyType?: SortOrderInput | SortOrder
+    eyeColor?: SortOrderInput | SortOrder
+    hairColor?: SortOrderInput | SortOrder
+    bio?: SortOrderInput | SortOrder
     instagram?: SortOrderInput | SortOrder
     portfolioUrl?: SortOrderInput | SortOrder
     profileImage?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: ContestantCountOrderByAggregateInput
     _avg?: ContestantAvgOrderByAggregateInput
     _max?: ContestantMaxOrderByAggregateInput
@@ -13918,19 +15370,25 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Contestant"> | string
     userId?: StringWithAggregatesFilter<"Contestant"> | string
     fullName?: StringWithAggregatesFilter<"Contestant"> | string
-    age?: IntWithAggregatesFilter<"Contestant"> | number
-    gender?: StringWithAggregatesFilter<"Contestant"> | string
-    country?: StringWithAggregatesFilter<"Contestant"> | string
-    height?: DecimalWithAggregatesFilter<"Contestant"> | Decimal | DecimalJsLike | number | string
-    weight?: DecimalWithAggregatesFilter<"Contestant"> | Decimal | DecimalJsLike | number | string
-    bodyType?: StringWithAggregatesFilter<"Contestant"> | string
-    eyeColor?: StringWithAggregatesFilter<"Contestant"> | string
-    hairColor?: StringWithAggregatesFilter<"Contestant"> | string
-    bio?: StringWithAggregatesFilter<"Contestant"> | string
+    dateOfBirth?: DateTimeNullableWithAggregatesFilter<"Contestant"> | Date | string | null
+    age?: IntNullableWithAggregatesFilter<"Contestant"> | number | null
+    gender?: StringNullableWithAggregatesFilter<"Contestant"> | string | null
+    country?: StringNullableWithAggregatesFilter<"Contestant"> | string | null
+    city?: StringNullableWithAggregatesFilter<"Contestant"> | string | null
+    phone?: StringNullableWithAggregatesFilter<"Contestant"> | string | null
+    occupation?: StringNullableWithAggregatesFilter<"Contestant"> | string | null
+    experience?: StringNullableWithAggregatesFilter<"Contestant"> | string | null
+    height?: DecimalNullableWithAggregatesFilter<"Contestant"> | Decimal | DecimalJsLike | number | string | null
+    weight?: DecimalNullableWithAggregatesFilter<"Contestant"> | Decimal | DecimalJsLike | number | string | null
+    bodyType?: StringNullableWithAggregatesFilter<"Contestant"> | string | null
+    eyeColor?: StringNullableWithAggregatesFilter<"Contestant"> | string | null
+    hairColor?: StringNullableWithAggregatesFilter<"Contestant"> | string | null
+    bio?: StringNullableWithAggregatesFilter<"Contestant"> | string | null
     instagram?: StringNullableWithAggregatesFilter<"Contestant"> | string | null
     portfolioUrl?: StringNullableWithAggregatesFilter<"Contestant"> | string | null
     profileImage?: StringNullableWithAggregatesFilter<"Contestant"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Contestant"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Contestant"> | Date | string
   }
 
   export type ContestantImageWhereInput = {
@@ -13999,6 +15457,9 @@ export namespace Prisma {
     startDate?: DateTimeFilter<"Competition"> | Date | string
     endDate?: DateTimeFilter<"Competition"> | Date | string
     status?: EnumCompetitionStatusFilter<"Competition"> | $Enums.CompetitionStatus
+    bannerImage?: StringNullableFilter<"Competition"> | string | null
+    prizePool?: StringNullableFilter<"Competition"> | string | null
+    questions?: StringNullableListFilter<"Competition">
     createdAt?: DateTimeFilter<"Competition"> | Date | string
     entries?: CompetitionEntryListRelationFilter
     votes?: VoteListRelationFilter
@@ -14012,6 +15473,9 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     status?: SortOrder
+    bannerImage?: SortOrderInput | SortOrder
+    prizePool?: SortOrderInput | SortOrder
+    questions?: SortOrder
     createdAt?: SortOrder
     entries?: CompetitionEntryOrderByRelationAggregateInput
     votes?: VoteOrderByRelationAggregateInput
@@ -14028,6 +15492,9 @@ export namespace Prisma {
     startDate?: DateTimeFilter<"Competition"> | Date | string
     endDate?: DateTimeFilter<"Competition"> | Date | string
     status?: EnumCompetitionStatusFilter<"Competition"> | $Enums.CompetitionStatus
+    bannerImage?: StringNullableFilter<"Competition"> | string | null
+    prizePool?: StringNullableFilter<"Competition"> | string | null
+    questions?: StringNullableListFilter<"Competition">
     createdAt?: DateTimeFilter<"Competition"> | Date | string
     entries?: CompetitionEntryListRelationFilter
     votes?: VoteListRelationFilter
@@ -14041,6 +15508,9 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     status?: SortOrder
+    bannerImage?: SortOrderInput | SortOrder
+    prizePool?: SortOrderInput | SortOrder
+    questions?: SortOrder
     createdAt?: SortOrder
     _count?: CompetitionCountOrderByAggregateInput
     _max?: CompetitionMaxOrderByAggregateInput
@@ -14058,6 +15528,9 @@ export namespace Prisma {
     startDate?: DateTimeWithAggregatesFilter<"Competition"> | Date | string
     endDate?: DateTimeWithAggregatesFilter<"Competition"> | Date | string
     status?: EnumCompetitionStatusWithAggregatesFilter<"Competition"> | $Enums.CompetitionStatus
+    bannerImage?: StringNullableWithAggregatesFilter<"Competition"> | string | null
+    prizePool?: StringNullableWithAggregatesFilter<"Competition"> | string | null
+    questions?: StringNullableListFilter<"Competition">
     createdAt?: DateTimeWithAggregatesFilter<"Competition"> | Date | string
   }
 
@@ -14072,10 +15545,12 @@ export namespace Prisma {
     overallScore?: DecimalNullableFilter<"CompetitionEntry"> | Decimal | DecimalJsLike | number | string | null
     voteCount?: IntFilter<"CompetitionEntry"> | number
     rank?: IntNullableFilter<"CompetitionEntry"> | number | null
+    submittedAt?: DateTimeNullableFilter<"CompetitionEntry"> | Date | string | null
     createdAt?: DateTimeFilter<"CompetitionEntry"> | Date | string
     competition?: XOR<CompetitionScalarRelationFilter, CompetitionWhereInput>
     contestant?: XOR<ContestantScalarRelationFilter, ContestantWhereInput>
     scoreResult?: XOR<ScoreResultNullableScalarRelationFilter, ScoreResultWhereInput> | null
+    answers?: EntryAnswerListRelationFilter
   }
 
   export type CompetitionEntryOrderByWithRelationInput = {
@@ -14086,10 +15561,12 @@ export namespace Prisma {
     overallScore?: SortOrderInput | SortOrder
     voteCount?: SortOrder
     rank?: SortOrderInput | SortOrder
+    submittedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     competition?: CompetitionOrderByWithRelationInput
     contestant?: ContestantOrderByWithRelationInput
     scoreResult?: ScoreResultOrderByWithRelationInput
+    answers?: EntryAnswerOrderByRelationAggregateInput
   }
 
   export type CompetitionEntryWhereUniqueInput = Prisma.AtLeast<{
@@ -14104,10 +15581,12 @@ export namespace Prisma {
     overallScore?: DecimalNullableFilter<"CompetitionEntry"> | Decimal | DecimalJsLike | number | string | null
     voteCount?: IntFilter<"CompetitionEntry"> | number
     rank?: IntNullableFilter<"CompetitionEntry"> | number | null
+    submittedAt?: DateTimeNullableFilter<"CompetitionEntry"> | Date | string | null
     createdAt?: DateTimeFilter<"CompetitionEntry"> | Date | string
     competition?: XOR<CompetitionScalarRelationFilter, CompetitionWhereInput>
     contestant?: XOR<ContestantScalarRelationFilter, ContestantWhereInput>
     scoreResult?: XOR<ScoreResultNullableScalarRelationFilter, ScoreResultWhereInput> | null
+    answers?: EntryAnswerListRelationFilter
   }, "id" | "competitionId_contestantId">
 
   export type CompetitionEntryOrderByWithAggregationInput = {
@@ -14118,6 +15597,7 @@ export namespace Prisma {
     overallScore?: SortOrderInput | SortOrder
     voteCount?: SortOrder
     rank?: SortOrderInput | SortOrder
+    submittedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: CompetitionEntryCountOrderByAggregateInput
     _avg?: CompetitionEntryAvgOrderByAggregateInput
@@ -14137,7 +15617,76 @@ export namespace Prisma {
     overallScore?: DecimalNullableWithAggregatesFilter<"CompetitionEntry"> | Decimal | DecimalJsLike | number | string | null
     voteCount?: IntWithAggregatesFilter<"CompetitionEntry"> | number
     rank?: IntNullableWithAggregatesFilter<"CompetitionEntry"> | number | null
+    submittedAt?: DateTimeNullableWithAggregatesFilter<"CompetitionEntry"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"CompetitionEntry"> | Date | string
+  }
+
+  export type EntryAnswerWhereInput = {
+    AND?: EntryAnswerWhereInput | EntryAnswerWhereInput[]
+    OR?: EntryAnswerWhereInput[]
+    NOT?: EntryAnswerWhereInput | EntryAnswerWhereInput[]
+    id?: StringFilter<"EntryAnswer"> | string
+    entryId?: StringFilter<"EntryAnswer"> | string
+    order?: IntFilter<"EntryAnswer"> | number
+    question?: StringFilter<"EntryAnswer"> | string
+    answer?: StringFilter<"EntryAnswer"> | string
+    wordCount?: IntFilter<"EntryAnswer"> | number
+    createdAt?: DateTimeFilter<"EntryAnswer"> | Date | string
+    entry?: XOR<CompetitionEntryScalarRelationFilter, CompetitionEntryWhereInput>
+  }
+
+  export type EntryAnswerOrderByWithRelationInput = {
+    id?: SortOrder
+    entryId?: SortOrder
+    order?: SortOrder
+    question?: SortOrder
+    answer?: SortOrder
+    wordCount?: SortOrder
+    createdAt?: SortOrder
+    entry?: CompetitionEntryOrderByWithRelationInput
+  }
+
+  export type EntryAnswerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    entryId_order?: EntryAnswerEntryIdOrderCompoundUniqueInput
+    AND?: EntryAnswerWhereInput | EntryAnswerWhereInput[]
+    OR?: EntryAnswerWhereInput[]
+    NOT?: EntryAnswerWhereInput | EntryAnswerWhereInput[]
+    entryId?: StringFilter<"EntryAnswer"> | string
+    order?: IntFilter<"EntryAnswer"> | number
+    question?: StringFilter<"EntryAnswer"> | string
+    answer?: StringFilter<"EntryAnswer"> | string
+    wordCount?: IntFilter<"EntryAnswer"> | number
+    createdAt?: DateTimeFilter<"EntryAnswer"> | Date | string
+    entry?: XOR<CompetitionEntryScalarRelationFilter, CompetitionEntryWhereInput>
+  }, "id" | "entryId_order">
+
+  export type EntryAnswerOrderByWithAggregationInput = {
+    id?: SortOrder
+    entryId?: SortOrder
+    order?: SortOrder
+    question?: SortOrder
+    answer?: SortOrder
+    wordCount?: SortOrder
+    createdAt?: SortOrder
+    _count?: EntryAnswerCountOrderByAggregateInput
+    _avg?: EntryAnswerAvgOrderByAggregateInput
+    _max?: EntryAnswerMaxOrderByAggregateInput
+    _min?: EntryAnswerMinOrderByAggregateInput
+    _sum?: EntryAnswerSumOrderByAggregateInput
+  }
+
+  export type EntryAnswerScalarWhereWithAggregatesInput = {
+    AND?: EntryAnswerScalarWhereWithAggregatesInput | EntryAnswerScalarWhereWithAggregatesInput[]
+    OR?: EntryAnswerScalarWhereWithAggregatesInput[]
+    NOT?: EntryAnswerScalarWhereWithAggregatesInput | EntryAnswerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EntryAnswer"> | string
+    entryId?: StringWithAggregatesFilter<"EntryAnswer"> | string
+    order?: IntWithAggregatesFilter<"EntryAnswer"> | number
+    question?: StringWithAggregatesFilter<"EntryAnswer"> | string
+    answer?: StringWithAggregatesFilter<"EntryAnswer"> | string
+    wordCount?: IntWithAggregatesFilter<"EntryAnswer"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"EntryAnswer"> | Date | string
   }
 
   export type VoteWhereInput = {
@@ -14571,19 +16120,25 @@ export namespace Prisma {
   export type ContestantCreateInput = {
     id?: string
     fullName: string
-    age: number
-    gender: string
-    country: string
-    height: Decimal | DecimalJsLike | number | string
-    weight: Decimal | DecimalJsLike | number | string
-    bodyType: string
-    eyeColor: string
-    hairColor: string
-    bio: string
+    dateOfBirth?: Date | string | null
+    age?: number | null
+    gender?: string | null
+    country?: string | null
+    city?: string | null
+    phone?: string | null
+    occupation?: string | null
+    experience?: string | null
+    height?: Decimal | DecimalJsLike | number | string | null
+    weight?: Decimal | DecimalJsLike | number | string | null
+    bodyType?: string | null
+    eyeColor?: string | null
+    hairColor?: string | null
+    bio?: string | null
     instagram?: string | null
     portfolioUrl?: string | null
     profileImage?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutContestantInput
     images?: ContestantImageCreateNestedManyWithoutContestantInput
     entries?: CompetitionEntryCreateNestedManyWithoutContestantInput
@@ -14593,19 +16148,25 @@ export namespace Prisma {
     id?: string
     userId: string
     fullName: string
-    age: number
-    gender: string
-    country: string
-    height: Decimal | DecimalJsLike | number | string
-    weight: Decimal | DecimalJsLike | number | string
-    bodyType: string
-    eyeColor: string
-    hairColor: string
-    bio: string
+    dateOfBirth?: Date | string | null
+    age?: number | null
+    gender?: string | null
+    country?: string | null
+    city?: string | null
+    phone?: string | null
+    occupation?: string | null
+    experience?: string | null
+    height?: Decimal | DecimalJsLike | number | string | null
+    weight?: Decimal | DecimalJsLike | number | string | null
+    bodyType?: string | null
+    eyeColor?: string | null
+    hairColor?: string | null
+    bio?: string | null
     instagram?: string | null
     portfolioUrl?: string | null
     profileImage?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     images?: ContestantImageUncheckedCreateNestedManyWithoutContestantInput
     entries?: CompetitionEntryUncheckedCreateNestedManyWithoutContestantInput
   }
@@ -14613,19 +16174,25 @@ export namespace Prisma {
   export type ContestantUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
-    age?: IntFieldUpdateOperationsInput | number
-    gender?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    height?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    bodyType?: StringFieldUpdateOperationsInput | string
-    eyeColor?: StringFieldUpdateOperationsInput | string
-    hairColor?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    occupation?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    height?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    bodyType?: NullableStringFieldUpdateOperationsInput | string | null
+    eyeColor?: NullableStringFieldUpdateOperationsInput | string | null
+    hairColor?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutContestantNestedInput
     images?: ContestantImageUpdateManyWithoutContestantNestedInput
     entries?: CompetitionEntryUpdateManyWithoutContestantNestedInput
@@ -14635,19 +16202,25 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
-    age?: IntFieldUpdateOperationsInput | number
-    gender?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    height?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    bodyType?: StringFieldUpdateOperationsInput | string
-    eyeColor?: StringFieldUpdateOperationsInput | string
-    hairColor?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    occupation?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    height?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    bodyType?: NullableStringFieldUpdateOperationsInput | string | null
+    eyeColor?: NullableStringFieldUpdateOperationsInput | string | null
+    hairColor?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: ContestantImageUncheckedUpdateManyWithoutContestantNestedInput
     entries?: CompetitionEntryUncheckedUpdateManyWithoutContestantNestedInput
   }
@@ -14656,56 +16229,74 @@ export namespace Prisma {
     id?: string
     userId: string
     fullName: string
-    age: number
-    gender: string
-    country: string
-    height: Decimal | DecimalJsLike | number | string
-    weight: Decimal | DecimalJsLike | number | string
-    bodyType: string
-    eyeColor: string
-    hairColor: string
-    bio: string
+    dateOfBirth?: Date | string | null
+    age?: number | null
+    gender?: string | null
+    country?: string | null
+    city?: string | null
+    phone?: string | null
+    occupation?: string | null
+    experience?: string | null
+    height?: Decimal | DecimalJsLike | number | string | null
+    weight?: Decimal | DecimalJsLike | number | string | null
+    bodyType?: string | null
+    eyeColor?: string | null
+    hairColor?: string | null
+    bio?: string | null
     instagram?: string | null
     portfolioUrl?: string | null
     profileImage?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ContestantUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
-    age?: IntFieldUpdateOperationsInput | number
-    gender?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    height?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    bodyType?: StringFieldUpdateOperationsInput | string
-    eyeColor?: StringFieldUpdateOperationsInput | string
-    hairColor?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    occupation?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    height?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    bodyType?: NullableStringFieldUpdateOperationsInput | string | null
+    eyeColor?: NullableStringFieldUpdateOperationsInput | string | null
+    hairColor?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ContestantUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
-    age?: IntFieldUpdateOperationsInput | number
-    gender?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    height?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    bodyType?: StringFieldUpdateOperationsInput | string
-    eyeColor?: StringFieldUpdateOperationsInput | string
-    hairColor?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    occupation?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    height?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    bodyType?: NullableStringFieldUpdateOperationsInput | string | null
+    eyeColor?: NullableStringFieldUpdateOperationsInput | string | null
+    hairColor?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ContestantImageCreateInput = {
@@ -14771,6 +16362,9 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     status?: $Enums.CompetitionStatus
+    bannerImage?: string | null
+    prizePool?: string | null
+    questions?: CompetitionCreatequestionsInput | string[]
     createdAt?: Date | string
     entries?: CompetitionEntryCreateNestedManyWithoutCompetitionInput
     votes?: VoteCreateNestedManyWithoutCompetitionInput
@@ -14784,6 +16378,9 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     status?: $Enums.CompetitionStatus
+    bannerImage?: string | null
+    prizePool?: string | null
+    questions?: CompetitionCreatequestionsInput | string[]
     createdAt?: Date | string
     entries?: CompetitionEntryUncheckedCreateNestedManyWithoutCompetitionInput
     votes?: VoteUncheckedCreateNestedManyWithoutCompetitionInput
@@ -14797,6 +16394,9 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumCompetitionStatusFieldUpdateOperationsInput | $Enums.CompetitionStatus
+    bannerImage?: NullableStringFieldUpdateOperationsInput | string | null
+    prizePool?: NullableStringFieldUpdateOperationsInput | string | null
+    questions?: CompetitionUpdatequestionsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entries?: CompetitionEntryUpdateManyWithoutCompetitionNestedInput
     votes?: VoteUpdateManyWithoutCompetitionNestedInput
@@ -14810,6 +16410,9 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumCompetitionStatusFieldUpdateOperationsInput | $Enums.CompetitionStatus
+    bannerImage?: NullableStringFieldUpdateOperationsInput | string | null
+    prizePool?: NullableStringFieldUpdateOperationsInput | string | null
+    questions?: CompetitionUpdatequestionsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entries?: CompetitionEntryUncheckedUpdateManyWithoutCompetitionNestedInput
     votes?: VoteUncheckedUpdateManyWithoutCompetitionNestedInput
@@ -14823,6 +16426,9 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     status?: $Enums.CompetitionStatus
+    bannerImage?: string | null
+    prizePool?: string | null
+    questions?: CompetitionCreatequestionsInput | string[]
     createdAt?: Date | string
   }
 
@@ -14834,6 +16440,9 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumCompetitionStatusFieldUpdateOperationsInput | $Enums.CompetitionStatus
+    bannerImage?: NullableStringFieldUpdateOperationsInput | string | null
+    prizePool?: NullableStringFieldUpdateOperationsInput | string | null
+    questions?: CompetitionUpdatequestionsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -14845,6 +16454,9 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumCompetitionStatusFieldUpdateOperationsInput | $Enums.CompetitionStatus
+    bannerImage?: NullableStringFieldUpdateOperationsInput | string | null
+    prizePool?: NullableStringFieldUpdateOperationsInput | string | null
+    questions?: CompetitionUpdatequestionsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -14854,10 +16466,12 @@ export namespace Prisma {
     overallScore?: Decimal | DecimalJsLike | number | string | null
     voteCount?: number
     rank?: number | null
+    submittedAt?: Date | string | null
     createdAt?: Date | string
     competition: CompetitionCreateNestedOneWithoutEntriesInput
     contestant: ContestantCreateNestedOneWithoutEntriesInput
     scoreResult?: ScoreResultCreateNestedOneWithoutEntryInput
+    answers?: EntryAnswerCreateNestedManyWithoutEntryInput
   }
 
   export type CompetitionEntryUncheckedCreateInput = {
@@ -14868,8 +16482,10 @@ export namespace Prisma {
     overallScore?: Decimal | DecimalJsLike | number | string | null
     voteCount?: number
     rank?: number | null
+    submittedAt?: Date | string | null
     createdAt?: Date | string
     scoreResult?: ScoreResultUncheckedCreateNestedOneWithoutEntryInput
+    answers?: EntryAnswerUncheckedCreateNestedManyWithoutEntryInput
   }
 
   export type CompetitionEntryUpdateInput = {
@@ -14878,10 +16494,12 @@ export namespace Prisma {
     overallScore?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     voteCount?: IntFieldUpdateOperationsInput | number
     rank?: NullableIntFieldUpdateOperationsInput | number | null
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     competition?: CompetitionUpdateOneRequiredWithoutEntriesNestedInput
     contestant?: ContestantUpdateOneRequiredWithoutEntriesNestedInput
     scoreResult?: ScoreResultUpdateOneWithoutEntryNestedInput
+    answers?: EntryAnswerUpdateManyWithoutEntryNestedInput
   }
 
   export type CompetitionEntryUncheckedUpdateInput = {
@@ -14892,8 +16510,10 @@ export namespace Prisma {
     overallScore?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     voteCount?: IntFieldUpdateOperationsInput | number
     rank?: NullableIntFieldUpdateOperationsInput | number | null
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     scoreResult?: ScoreResultUncheckedUpdateOneWithoutEntryNestedInput
+    answers?: EntryAnswerUncheckedUpdateManyWithoutEntryNestedInput
   }
 
   export type CompetitionEntryCreateManyInput = {
@@ -14904,6 +16524,7 @@ export namespace Prisma {
     overallScore?: Decimal | DecimalJsLike | number | string | null
     voteCount?: number
     rank?: number | null
+    submittedAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -14913,6 +16534,7 @@ export namespace Prisma {
     overallScore?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     voteCount?: IntFieldUpdateOperationsInput | number
     rank?: NullableIntFieldUpdateOperationsInput | number | null
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -14924,6 +16546,76 @@ export namespace Prisma {
     overallScore?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     voteCount?: IntFieldUpdateOperationsInput | number
     rank?: NullableIntFieldUpdateOperationsInput | number | null
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EntryAnswerCreateInput = {
+    id?: string
+    order: number
+    question: string
+    answer: string
+    wordCount: number
+    createdAt?: Date | string
+    entry: CompetitionEntryCreateNestedOneWithoutAnswersInput
+  }
+
+  export type EntryAnswerUncheckedCreateInput = {
+    id?: string
+    entryId: string
+    order: number
+    question: string
+    answer: string
+    wordCount: number
+    createdAt?: Date | string
+  }
+
+  export type EntryAnswerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: StringFieldUpdateOperationsInput | string
+    wordCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    entry?: CompetitionEntryUpdateOneRequiredWithoutAnswersNestedInput
+  }
+
+  export type EntryAnswerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    entryId?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: StringFieldUpdateOperationsInput | string
+    wordCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EntryAnswerCreateManyInput = {
+    id?: string
+    entryId: string
+    order: number
+    question: string
+    answer: string
+    wordCount: number
+    createdAt?: Date | string
+  }
+
+  export type EntryAnswerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: StringFieldUpdateOperationsInput | string
+    wordCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EntryAnswerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    entryId?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: StringFieldUpdateOperationsInput | string
+    wordCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -15411,26 +17103,15 @@ export namespace Prisma {
     expires?: SortOrder
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type DecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
     lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
   }
 
   export type ContestantImageListRelationFilter = {
@@ -15457,9 +17138,14 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     fullName?: SortOrder
+    dateOfBirth?: SortOrder
     age?: SortOrder
     gender?: SortOrder
     country?: SortOrder
+    city?: SortOrder
+    phone?: SortOrder
+    occupation?: SortOrder
+    experience?: SortOrder
     height?: SortOrder
     weight?: SortOrder
     bodyType?: SortOrder
@@ -15470,6 +17156,7 @@ export namespace Prisma {
     portfolioUrl?: SortOrder
     profileImage?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ContestantAvgOrderByAggregateInput = {
@@ -15482,9 +17169,14 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     fullName?: SortOrder
+    dateOfBirth?: SortOrder
     age?: SortOrder
     gender?: SortOrder
     country?: SortOrder
+    city?: SortOrder
+    phone?: SortOrder
+    occupation?: SortOrder
+    experience?: SortOrder
     height?: SortOrder
     weight?: SortOrder
     bodyType?: SortOrder
@@ -15495,15 +17187,21 @@ export namespace Prisma {
     portfolioUrl?: SortOrder
     profileImage?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ContestantMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     fullName?: SortOrder
+    dateOfBirth?: SortOrder
     age?: SortOrder
     gender?: SortOrder
     country?: SortOrder
+    city?: SortOrder
+    phone?: SortOrder
+    occupation?: SortOrder
+    experience?: SortOrder
     height?: SortOrder
     weight?: SortOrder
     bodyType?: SortOrder
@@ -15514,6 +17212,7 @@ export namespace Prisma {
     portfolioUrl?: SortOrder
     profileImage?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ContestantSumOrderByAggregateInput = {
@@ -15522,36 +17221,20 @@ export namespace Prisma {
     weight?: SortOrder
   }
 
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
     lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
   export type EnumImageTypeFilter<$PrismaModel = never> = {
@@ -15614,6 +17297,14 @@ export namespace Prisma {
     not?: NestedEnumCompetitionStatusFilter<$PrismaModel> | $Enums.CompetitionStatus
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type CompetitionCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
@@ -15622,6 +17313,9 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     status?: SortOrder
+    bannerImage?: SortOrder
+    prizePool?: SortOrder
+    questions?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -15633,6 +17327,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     status?: SortOrder
+    bannerImage?: SortOrder
+    prizePool?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -15644,6 +17340,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     status?: SortOrder
+    bannerImage?: SortOrder
+    prizePool?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -15674,15 +17372,15 @@ export namespace Prisma {
     not?: NestedEnumEntryStatusFilter<$PrismaModel> | $Enums.EntryStatus
   }
 
-  export type DecimalNullableFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type CompetitionScalarRelationFilter = {
@@ -15693,6 +17391,16 @@ export namespace Prisma {
   export type ScoreResultNullableScalarRelationFilter = {
     is?: ScoreResultWhereInput | null
     isNot?: ScoreResultWhereInput | null
+  }
+
+  export type EntryAnswerListRelationFilter = {
+    every?: EntryAnswerWhereInput
+    some?: EntryAnswerWhereInput
+    none?: EntryAnswerWhereInput
+  }
+
+  export type EntryAnswerOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type CompetitionEntryCompetitionIdContestantIdCompoundUniqueInput = {
@@ -15708,6 +17416,7 @@ export namespace Prisma {
     overallScore?: SortOrder
     voteCount?: SortOrder
     rank?: SortOrder
+    submittedAt?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -15725,6 +17434,7 @@ export namespace Prisma {
     overallScore?: SortOrder
     voteCount?: SortOrder
     rank?: SortOrder
+    submittedAt?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -15736,6 +17446,7 @@ export namespace Prisma {
     overallScore?: SortOrder
     voteCount?: SortOrder
     rank?: SortOrder
+    submittedAt?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -15755,20 +17466,70 @@ export namespace Prisma {
     _max?: NestedEnumEntryStatusFilter<$PrismaModel>
   }
 
-  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedDecimalNullableFilter<$PrismaModel>
-    _sum?: NestedDecimalNullableFilter<$PrismaModel>
-    _min?: NestedDecimalNullableFilter<$PrismaModel>
-    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type CompetitionEntryScalarRelationFilter = {
+    is?: CompetitionEntryWhereInput
+    isNot?: CompetitionEntryWhereInput
+  }
+
+  export type EntryAnswerEntryIdOrderCompoundUniqueInput = {
+    entryId: string
+    order: number
+  }
+
+  export type EntryAnswerCountOrderByAggregateInput = {
+    id?: SortOrder
+    entryId?: SortOrder
+    order?: SortOrder
+    question?: SortOrder
+    answer?: SortOrder
+    wordCount?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EntryAnswerAvgOrderByAggregateInput = {
+    order?: SortOrder
+    wordCount?: SortOrder
+  }
+
+  export type EntryAnswerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    entryId?: SortOrder
+    order?: SortOrder
+    question?: SortOrder
+    answer?: SortOrder
+    wordCount?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EntryAnswerMinOrderByAggregateInput = {
+    id?: SortOrder
+    entryId?: SortOrder
+    order?: SortOrder
+    question?: SortOrder
+    answer?: SortOrder
+    wordCount?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EntryAnswerSumOrderByAggregateInput = {
+    order?: SortOrder
+    wordCount?: SortOrder
   }
 
   export type VoteCompetitionIdVoterIdCompoundUniqueInput = {
@@ -15803,9 +17564,15 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type CompetitionEntryScalarRelationFilter = {
-    is?: CompetitionEntryWhereInput
-    isNot?: CompetitionEntryWhereInput
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
   export type ScoreResultCountOrderByAggregateInput = {
@@ -15860,6 +17627,22 @@ export namespace Prisma {
     profileScore?: SortOrder
     professionalismScore?: SortOrder
     overallScore?: SortOrder
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type AccountCreateNestedManyWithoutUserInput = {
@@ -16110,16 +17893,8 @@ export namespace Prisma {
     connect?: CompetitionEntryWhereUniqueInput | CompetitionEntryWhereUniqueInput[]
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type DecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string | null
     increment?: Decimal | DecimalJsLike | number | string
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
@@ -16208,6 +17983,10 @@ export namespace Prisma {
     update?: XOR<XOR<ContestantUpdateToOneWithWhereWithoutImagesInput, ContestantUpdateWithoutImagesInput>, ContestantUncheckedUpdateWithoutImagesInput>
   }
 
+  export type CompetitionCreatequestionsInput = {
+    set: string[]
+  }
+
   export type CompetitionEntryCreateNestedManyWithoutCompetitionInput = {
     create?: XOR<CompetitionEntryCreateWithoutCompetitionInput, CompetitionEntryUncheckedCreateWithoutCompetitionInput> | CompetitionEntryCreateWithoutCompetitionInput[] | CompetitionEntryUncheckedCreateWithoutCompetitionInput[]
     connectOrCreate?: CompetitionEntryCreateOrConnectWithoutCompetitionInput | CompetitionEntryCreateOrConnectWithoutCompetitionInput[]
@@ -16242,6 +18021,11 @@ export namespace Prisma {
 
   export type EnumCompetitionStatusFieldUpdateOperationsInput = {
     set?: $Enums.CompetitionStatus
+  }
+
+  export type CompetitionUpdatequestionsInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type CompetitionEntryUpdateManyWithoutCompetitionNestedInput = {
@@ -16318,22 +18102,36 @@ export namespace Prisma {
     connect?: ScoreResultWhereUniqueInput
   }
 
+  export type EntryAnswerCreateNestedManyWithoutEntryInput = {
+    create?: XOR<EntryAnswerCreateWithoutEntryInput, EntryAnswerUncheckedCreateWithoutEntryInput> | EntryAnswerCreateWithoutEntryInput[] | EntryAnswerUncheckedCreateWithoutEntryInput[]
+    connectOrCreate?: EntryAnswerCreateOrConnectWithoutEntryInput | EntryAnswerCreateOrConnectWithoutEntryInput[]
+    createMany?: EntryAnswerCreateManyEntryInputEnvelope
+    connect?: EntryAnswerWhereUniqueInput | EntryAnswerWhereUniqueInput[]
+  }
+
   export type ScoreResultUncheckedCreateNestedOneWithoutEntryInput = {
     create?: XOR<ScoreResultCreateWithoutEntryInput, ScoreResultUncheckedCreateWithoutEntryInput>
     connectOrCreate?: ScoreResultCreateOrConnectWithoutEntryInput
     connect?: ScoreResultWhereUniqueInput
   }
 
+  export type EntryAnswerUncheckedCreateNestedManyWithoutEntryInput = {
+    create?: XOR<EntryAnswerCreateWithoutEntryInput, EntryAnswerUncheckedCreateWithoutEntryInput> | EntryAnswerCreateWithoutEntryInput[] | EntryAnswerUncheckedCreateWithoutEntryInput[]
+    connectOrCreate?: EntryAnswerCreateOrConnectWithoutEntryInput | EntryAnswerCreateOrConnectWithoutEntryInput[]
+    createMany?: EntryAnswerCreateManyEntryInputEnvelope
+    connect?: EntryAnswerWhereUniqueInput | EntryAnswerWhereUniqueInput[]
+  }
+
   export type EnumEntryStatusFieldUpdateOperationsInput = {
     set?: $Enums.EntryStatus
   }
 
-  export type NullableDecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string | null
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type CompetitionUpdateOneRequiredWithoutEntriesNestedInput = {
@@ -16362,6 +18160,20 @@ export namespace Prisma {
     update?: XOR<XOR<ScoreResultUpdateToOneWithWhereWithoutEntryInput, ScoreResultUpdateWithoutEntryInput>, ScoreResultUncheckedUpdateWithoutEntryInput>
   }
 
+  export type EntryAnswerUpdateManyWithoutEntryNestedInput = {
+    create?: XOR<EntryAnswerCreateWithoutEntryInput, EntryAnswerUncheckedCreateWithoutEntryInput> | EntryAnswerCreateWithoutEntryInput[] | EntryAnswerUncheckedCreateWithoutEntryInput[]
+    connectOrCreate?: EntryAnswerCreateOrConnectWithoutEntryInput | EntryAnswerCreateOrConnectWithoutEntryInput[]
+    upsert?: EntryAnswerUpsertWithWhereUniqueWithoutEntryInput | EntryAnswerUpsertWithWhereUniqueWithoutEntryInput[]
+    createMany?: EntryAnswerCreateManyEntryInputEnvelope
+    set?: EntryAnswerWhereUniqueInput | EntryAnswerWhereUniqueInput[]
+    disconnect?: EntryAnswerWhereUniqueInput | EntryAnswerWhereUniqueInput[]
+    delete?: EntryAnswerWhereUniqueInput | EntryAnswerWhereUniqueInput[]
+    connect?: EntryAnswerWhereUniqueInput | EntryAnswerWhereUniqueInput[]
+    update?: EntryAnswerUpdateWithWhereUniqueWithoutEntryInput | EntryAnswerUpdateWithWhereUniqueWithoutEntryInput[]
+    updateMany?: EntryAnswerUpdateManyWithWhereWithoutEntryInput | EntryAnswerUpdateManyWithWhereWithoutEntryInput[]
+    deleteMany?: EntryAnswerScalarWhereInput | EntryAnswerScalarWhereInput[]
+  }
+
   export type ScoreResultUncheckedUpdateOneWithoutEntryNestedInput = {
     create?: XOR<ScoreResultCreateWithoutEntryInput, ScoreResultUncheckedCreateWithoutEntryInput>
     connectOrCreate?: ScoreResultCreateOrConnectWithoutEntryInput
@@ -16370,6 +18182,34 @@ export namespace Prisma {
     delete?: ScoreResultWhereInput | boolean
     connect?: ScoreResultWhereUniqueInput
     update?: XOR<XOR<ScoreResultUpdateToOneWithWhereWithoutEntryInput, ScoreResultUpdateWithoutEntryInput>, ScoreResultUncheckedUpdateWithoutEntryInput>
+  }
+
+  export type EntryAnswerUncheckedUpdateManyWithoutEntryNestedInput = {
+    create?: XOR<EntryAnswerCreateWithoutEntryInput, EntryAnswerUncheckedCreateWithoutEntryInput> | EntryAnswerCreateWithoutEntryInput[] | EntryAnswerUncheckedCreateWithoutEntryInput[]
+    connectOrCreate?: EntryAnswerCreateOrConnectWithoutEntryInput | EntryAnswerCreateOrConnectWithoutEntryInput[]
+    upsert?: EntryAnswerUpsertWithWhereUniqueWithoutEntryInput | EntryAnswerUpsertWithWhereUniqueWithoutEntryInput[]
+    createMany?: EntryAnswerCreateManyEntryInputEnvelope
+    set?: EntryAnswerWhereUniqueInput | EntryAnswerWhereUniqueInput[]
+    disconnect?: EntryAnswerWhereUniqueInput | EntryAnswerWhereUniqueInput[]
+    delete?: EntryAnswerWhereUniqueInput | EntryAnswerWhereUniqueInput[]
+    connect?: EntryAnswerWhereUniqueInput | EntryAnswerWhereUniqueInput[]
+    update?: EntryAnswerUpdateWithWhereUniqueWithoutEntryInput | EntryAnswerUpdateWithWhereUniqueWithoutEntryInput[]
+    updateMany?: EntryAnswerUpdateManyWithWhereWithoutEntryInput | EntryAnswerUpdateManyWithWhereWithoutEntryInput[]
+    deleteMany?: EntryAnswerScalarWhereInput | EntryAnswerScalarWhereInput[]
+  }
+
+  export type CompetitionEntryCreateNestedOneWithoutAnswersInput = {
+    create?: XOR<CompetitionEntryCreateWithoutAnswersInput, CompetitionEntryUncheckedCreateWithoutAnswersInput>
+    connectOrCreate?: CompetitionEntryCreateOrConnectWithoutAnswersInput
+    connect?: CompetitionEntryWhereUniqueInput
+  }
+
+  export type CompetitionEntryUpdateOneRequiredWithoutAnswersNestedInput = {
+    create?: XOR<CompetitionEntryCreateWithoutAnswersInput, CompetitionEntryUncheckedCreateWithoutAnswersInput>
+    connectOrCreate?: CompetitionEntryCreateOrConnectWithoutAnswersInput
+    upsert?: CompetitionEntryUpsertWithoutAnswersInput
+    connect?: CompetitionEntryWhereUniqueInput
+    update?: XOR<XOR<CompetitionEntryUpdateToOneWithWhereWithoutAnswersInput, CompetitionEntryUpdateWithoutAnswersInput>, CompetitionEntryUncheckedUpdateWithoutAnswersInput>
   }
 
   export type CompetitionCreateNestedOneWithoutVotesInput = {
@@ -16404,6 +18244,14 @@ export namespace Prisma {
     create?: XOR<CompetitionEntryCreateWithoutScoreResultInput, CompetitionEntryUncheckedCreateWithoutScoreResultInput>
     connectOrCreate?: CompetitionEntryCreateOrConnectWithoutScoreResultInput
     connect?: CompetitionEntryWhereUniqueInput
+  }
+
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
   }
 
   export type CompetitionEntryUpdateOneRequiredWithoutScoreResultNestedInput = {
@@ -16592,58 +18440,31 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedDecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
     lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
     lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumImageTypeFilter<$PrismaModel = never> = {
@@ -16704,17 +18525,6 @@ export namespace Prisma {
     not?: NestedEnumEntryStatusFilter<$PrismaModel> | $Enums.EntryStatus
   }
 
-  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-  }
-
   export type NestedEnumEntryStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.EntryStatus | EnumEntryStatusFieldRefInput<$PrismaModel>
     in?: $Enums.EntryStatus[] | ListEnumEntryStatusFieldRefInput<$PrismaModel>
@@ -16725,20 +18535,58 @@ export namespace Prisma {
     _max?: NestedEnumEntryStatusFilter<$PrismaModel>
   }
 
-  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
     lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedDecimalNullableFilter<$PrismaModel>
-    _sum?: NestedDecimalNullableFilter<$PrismaModel>
-    _min?: NestedDecimalNullableFilter<$PrismaModel>
-    _max?: NestedDecimalNullableFilter<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -16804,19 +18652,25 @@ export namespace Prisma {
   export type ContestantCreateWithoutUserInput = {
     id?: string
     fullName: string
-    age: number
-    gender: string
-    country: string
-    height: Decimal | DecimalJsLike | number | string
-    weight: Decimal | DecimalJsLike | number | string
-    bodyType: string
-    eyeColor: string
-    hairColor: string
-    bio: string
+    dateOfBirth?: Date | string | null
+    age?: number | null
+    gender?: string | null
+    country?: string | null
+    city?: string | null
+    phone?: string | null
+    occupation?: string | null
+    experience?: string | null
+    height?: Decimal | DecimalJsLike | number | string | null
+    weight?: Decimal | DecimalJsLike | number | string | null
+    bodyType?: string | null
+    eyeColor?: string | null
+    hairColor?: string | null
+    bio?: string | null
     instagram?: string | null
     portfolioUrl?: string | null
     profileImage?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     images?: ContestantImageCreateNestedManyWithoutContestantInput
     entries?: CompetitionEntryCreateNestedManyWithoutContestantInput
   }
@@ -16824,19 +18678,25 @@ export namespace Prisma {
   export type ContestantUncheckedCreateWithoutUserInput = {
     id?: string
     fullName: string
-    age: number
-    gender: string
-    country: string
-    height: Decimal | DecimalJsLike | number | string
-    weight: Decimal | DecimalJsLike | number | string
-    bodyType: string
-    eyeColor: string
-    hairColor: string
-    bio: string
+    dateOfBirth?: Date | string | null
+    age?: number | null
+    gender?: string | null
+    country?: string | null
+    city?: string | null
+    phone?: string | null
+    occupation?: string | null
+    experience?: string | null
+    height?: Decimal | DecimalJsLike | number | string | null
+    weight?: Decimal | DecimalJsLike | number | string | null
+    bodyType?: string | null
+    eyeColor?: string | null
+    hairColor?: string | null
+    bio?: string | null
     instagram?: string | null
     portfolioUrl?: string | null
     profileImage?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     images?: ContestantImageUncheckedCreateNestedManyWithoutContestantInput
     entries?: CompetitionEntryUncheckedCreateNestedManyWithoutContestantInput
   }
@@ -16946,19 +18806,25 @@ export namespace Prisma {
   export type ContestantUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
-    age?: IntFieldUpdateOperationsInput | number
-    gender?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    height?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    bodyType?: StringFieldUpdateOperationsInput | string
-    eyeColor?: StringFieldUpdateOperationsInput | string
-    hairColor?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    occupation?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    height?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    bodyType?: NullableStringFieldUpdateOperationsInput | string | null
+    eyeColor?: NullableStringFieldUpdateOperationsInput | string | null
+    hairColor?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: ContestantImageUpdateManyWithoutContestantNestedInput
     entries?: CompetitionEntryUpdateManyWithoutContestantNestedInput
   }
@@ -16966,19 +18832,25 @@ export namespace Prisma {
   export type ContestantUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
-    age?: IntFieldUpdateOperationsInput | number
-    gender?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    height?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    bodyType?: StringFieldUpdateOperationsInput | string
-    eyeColor?: StringFieldUpdateOperationsInput | string
-    hairColor?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    occupation?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    height?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    bodyType?: NullableStringFieldUpdateOperationsInput | string | null
+    eyeColor?: NullableStringFieldUpdateOperationsInput | string | null
+    hairColor?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: ContestantImageUncheckedUpdateManyWithoutContestantNestedInput
     entries?: CompetitionEntryUncheckedUpdateManyWithoutContestantNestedInput
   }
@@ -17218,9 +19090,11 @@ export namespace Prisma {
     overallScore?: Decimal | DecimalJsLike | number | string | null
     voteCount?: number
     rank?: number | null
+    submittedAt?: Date | string | null
     createdAt?: Date | string
     competition: CompetitionCreateNestedOneWithoutEntriesInput
     scoreResult?: ScoreResultCreateNestedOneWithoutEntryInput
+    answers?: EntryAnswerCreateNestedManyWithoutEntryInput
   }
 
   export type CompetitionEntryUncheckedCreateWithoutContestantInput = {
@@ -17230,8 +19104,10 @@ export namespace Prisma {
     overallScore?: Decimal | DecimalJsLike | number | string | null
     voteCount?: number
     rank?: number | null
+    submittedAt?: Date | string | null
     createdAt?: Date | string
     scoreResult?: ScoreResultUncheckedCreateNestedOneWithoutEntryInput
+    answers?: EntryAnswerUncheckedCreateNestedManyWithoutEntryInput
   }
 
   export type CompetitionEntryCreateOrConnectWithoutContestantInput = {
@@ -17337,25 +19213,32 @@ export namespace Prisma {
     overallScore?: DecimalNullableFilter<"CompetitionEntry"> | Decimal | DecimalJsLike | number | string | null
     voteCount?: IntFilter<"CompetitionEntry"> | number
     rank?: IntNullableFilter<"CompetitionEntry"> | number | null
+    submittedAt?: DateTimeNullableFilter<"CompetitionEntry"> | Date | string | null
     createdAt?: DateTimeFilter<"CompetitionEntry"> | Date | string
   }
 
   export type ContestantCreateWithoutImagesInput = {
     id?: string
     fullName: string
-    age: number
-    gender: string
-    country: string
-    height: Decimal | DecimalJsLike | number | string
-    weight: Decimal | DecimalJsLike | number | string
-    bodyType: string
-    eyeColor: string
-    hairColor: string
-    bio: string
+    dateOfBirth?: Date | string | null
+    age?: number | null
+    gender?: string | null
+    country?: string | null
+    city?: string | null
+    phone?: string | null
+    occupation?: string | null
+    experience?: string | null
+    height?: Decimal | DecimalJsLike | number | string | null
+    weight?: Decimal | DecimalJsLike | number | string | null
+    bodyType?: string | null
+    eyeColor?: string | null
+    hairColor?: string | null
+    bio?: string | null
     instagram?: string | null
     portfolioUrl?: string | null
     profileImage?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutContestantInput
     entries?: CompetitionEntryCreateNestedManyWithoutContestantInput
   }
@@ -17364,19 +19247,25 @@ export namespace Prisma {
     id?: string
     userId: string
     fullName: string
-    age: number
-    gender: string
-    country: string
-    height: Decimal | DecimalJsLike | number | string
-    weight: Decimal | DecimalJsLike | number | string
-    bodyType: string
-    eyeColor: string
-    hairColor: string
-    bio: string
+    dateOfBirth?: Date | string | null
+    age?: number | null
+    gender?: string | null
+    country?: string | null
+    city?: string | null
+    phone?: string | null
+    occupation?: string | null
+    experience?: string | null
+    height?: Decimal | DecimalJsLike | number | string | null
+    weight?: Decimal | DecimalJsLike | number | string | null
+    bodyType?: string | null
+    eyeColor?: string | null
+    hairColor?: string | null
+    bio?: string | null
     instagram?: string | null
     portfolioUrl?: string | null
     profileImage?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     entries?: CompetitionEntryUncheckedCreateNestedManyWithoutContestantInput
   }
 
@@ -17399,19 +19288,25 @@ export namespace Prisma {
   export type ContestantUpdateWithoutImagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
-    age?: IntFieldUpdateOperationsInput | number
-    gender?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    height?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    bodyType?: StringFieldUpdateOperationsInput | string
-    eyeColor?: StringFieldUpdateOperationsInput | string
-    hairColor?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    occupation?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    height?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    bodyType?: NullableStringFieldUpdateOperationsInput | string | null
+    eyeColor?: NullableStringFieldUpdateOperationsInput | string | null
+    hairColor?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutContestantNestedInput
     entries?: CompetitionEntryUpdateManyWithoutContestantNestedInput
   }
@@ -17420,19 +19315,25 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
-    age?: IntFieldUpdateOperationsInput | number
-    gender?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    height?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    bodyType?: StringFieldUpdateOperationsInput | string
-    eyeColor?: StringFieldUpdateOperationsInput | string
-    hairColor?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    occupation?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    height?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    bodyType?: NullableStringFieldUpdateOperationsInput | string | null
+    eyeColor?: NullableStringFieldUpdateOperationsInput | string | null
+    hairColor?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entries?: CompetitionEntryUncheckedUpdateManyWithoutContestantNestedInput
   }
 
@@ -17442,9 +19343,11 @@ export namespace Prisma {
     overallScore?: Decimal | DecimalJsLike | number | string | null
     voteCount?: number
     rank?: number | null
+    submittedAt?: Date | string | null
     createdAt?: Date | string
     contestant: ContestantCreateNestedOneWithoutEntriesInput
     scoreResult?: ScoreResultCreateNestedOneWithoutEntryInput
+    answers?: EntryAnswerCreateNestedManyWithoutEntryInput
   }
 
   export type CompetitionEntryUncheckedCreateWithoutCompetitionInput = {
@@ -17454,8 +19357,10 @@ export namespace Prisma {
     overallScore?: Decimal | DecimalJsLike | number | string | null
     voteCount?: number
     rank?: number | null
+    submittedAt?: Date | string | null
     createdAt?: Date | string
     scoreResult?: ScoreResultUncheckedCreateNestedOneWithoutEntryInput
+    answers?: EntryAnswerUncheckedCreateNestedManyWithoutEntryInput
   }
 
   export type CompetitionEntryCreateOrConnectWithoutCompetitionInput = {
@@ -17534,6 +19439,9 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     status?: $Enums.CompetitionStatus
+    bannerImage?: string | null
+    prizePool?: string | null
+    questions?: CompetitionCreatequestionsInput | string[]
     createdAt?: Date | string
     votes?: VoteCreateNestedManyWithoutCompetitionInput
   }
@@ -17546,6 +19454,9 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     status?: $Enums.CompetitionStatus
+    bannerImage?: string | null
+    prizePool?: string | null
+    questions?: CompetitionCreatequestionsInput | string[]
     createdAt?: Date | string
     votes?: VoteUncheckedCreateNestedManyWithoutCompetitionInput
   }
@@ -17558,19 +19469,25 @@ export namespace Prisma {
   export type ContestantCreateWithoutEntriesInput = {
     id?: string
     fullName: string
-    age: number
-    gender: string
-    country: string
-    height: Decimal | DecimalJsLike | number | string
-    weight: Decimal | DecimalJsLike | number | string
-    bodyType: string
-    eyeColor: string
-    hairColor: string
-    bio: string
+    dateOfBirth?: Date | string | null
+    age?: number | null
+    gender?: string | null
+    country?: string | null
+    city?: string | null
+    phone?: string | null
+    occupation?: string | null
+    experience?: string | null
+    height?: Decimal | DecimalJsLike | number | string | null
+    weight?: Decimal | DecimalJsLike | number | string | null
+    bodyType?: string | null
+    eyeColor?: string | null
+    hairColor?: string | null
+    bio?: string | null
     instagram?: string | null
     portfolioUrl?: string | null
     profileImage?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutContestantInput
     images?: ContestantImageCreateNestedManyWithoutContestantInput
   }
@@ -17579,19 +19496,25 @@ export namespace Prisma {
     id?: string
     userId: string
     fullName: string
-    age: number
-    gender: string
-    country: string
-    height: Decimal | DecimalJsLike | number | string
-    weight: Decimal | DecimalJsLike | number | string
-    bodyType: string
-    eyeColor: string
-    hairColor: string
-    bio: string
+    dateOfBirth?: Date | string | null
+    age?: number | null
+    gender?: string | null
+    country?: string | null
+    city?: string | null
+    phone?: string | null
+    occupation?: string | null
+    experience?: string | null
+    height?: Decimal | DecimalJsLike | number | string | null
+    weight?: Decimal | DecimalJsLike | number | string | null
+    bodyType?: string | null
+    eyeColor?: string | null
+    hairColor?: string | null
+    bio?: string | null
     instagram?: string | null
     portfolioUrl?: string | null
     profileImage?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     images?: ContestantImageUncheckedCreateNestedManyWithoutContestantInput
   }
 
@@ -17627,6 +19550,34 @@ export namespace Prisma {
     create: XOR<ScoreResultCreateWithoutEntryInput, ScoreResultUncheckedCreateWithoutEntryInput>
   }
 
+  export type EntryAnswerCreateWithoutEntryInput = {
+    id?: string
+    order: number
+    question: string
+    answer: string
+    wordCount: number
+    createdAt?: Date | string
+  }
+
+  export type EntryAnswerUncheckedCreateWithoutEntryInput = {
+    id?: string
+    order: number
+    question: string
+    answer: string
+    wordCount: number
+    createdAt?: Date | string
+  }
+
+  export type EntryAnswerCreateOrConnectWithoutEntryInput = {
+    where: EntryAnswerWhereUniqueInput
+    create: XOR<EntryAnswerCreateWithoutEntryInput, EntryAnswerUncheckedCreateWithoutEntryInput>
+  }
+
+  export type EntryAnswerCreateManyEntryInputEnvelope = {
+    data: EntryAnswerCreateManyEntryInput | EntryAnswerCreateManyEntryInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CompetitionUpsertWithoutEntriesInput = {
     update: XOR<CompetitionUpdateWithoutEntriesInput, CompetitionUncheckedUpdateWithoutEntriesInput>
     create: XOR<CompetitionCreateWithoutEntriesInput, CompetitionUncheckedCreateWithoutEntriesInput>
@@ -17646,6 +19597,9 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumCompetitionStatusFieldUpdateOperationsInput | $Enums.CompetitionStatus
+    bannerImage?: NullableStringFieldUpdateOperationsInput | string | null
+    prizePool?: NullableStringFieldUpdateOperationsInput | string | null
+    questions?: CompetitionUpdatequestionsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     votes?: VoteUpdateManyWithoutCompetitionNestedInput
   }
@@ -17658,6 +19612,9 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumCompetitionStatusFieldUpdateOperationsInput | $Enums.CompetitionStatus
+    bannerImage?: NullableStringFieldUpdateOperationsInput | string | null
+    prizePool?: NullableStringFieldUpdateOperationsInput | string | null
+    questions?: CompetitionUpdatequestionsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     votes?: VoteUncheckedUpdateManyWithoutCompetitionNestedInput
   }
@@ -17676,19 +19633,25 @@ export namespace Prisma {
   export type ContestantUpdateWithoutEntriesInput = {
     id?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
-    age?: IntFieldUpdateOperationsInput | number
-    gender?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    height?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    bodyType?: StringFieldUpdateOperationsInput | string
-    eyeColor?: StringFieldUpdateOperationsInput | string
-    hairColor?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    occupation?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    height?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    bodyType?: NullableStringFieldUpdateOperationsInput | string | null
+    eyeColor?: NullableStringFieldUpdateOperationsInput | string | null
+    hairColor?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutContestantNestedInput
     images?: ContestantImageUpdateManyWithoutContestantNestedInput
   }
@@ -17697,19 +19660,25 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
-    age?: IntFieldUpdateOperationsInput | number
-    gender?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    height?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    weight?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    bodyType?: StringFieldUpdateOperationsInput | string
-    eyeColor?: StringFieldUpdateOperationsInput | string
-    hairColor?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    occupation?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    height?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    bodyType?: NullableStringFieldUpdateOperationsInput | string | null
+    eyeColor?: NullableStringFieldUpdateOperationsInput | string | null
+    hairColor?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: ContestantImageUncheckedUpdateManyWithoutContestantNestedInput
   }
 
@@ -17746,6 +19715,103 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EntryAnswerUpsertWithWhereUniqueWithoutEntryInput = {
+    where: EntryAnswerWhereUniqueInput
+    update: XOR<EntryAnswerUpdateWithoutEntryInput, EntryAnswerUncheckedUpdateWithoutEntryInput>
+    create: XOR<EntryAnswerCreateWithoutEntryInput, EntryAnswerUncheckedCreateWithoutEntryInput>
+  }
+
+  export type EntryAnswerUpdateWithWhereUniqueWithoutEntryInput = {
+    where: EntryAnswerWhereUniqueInput
+    data: XOR<EntryAnswerUpdateWithoutEntryInput, EntryAnswerUncheckedUpdateWithoutEntryInput>
+  }
+
+  export type EntryAnswerUpdateManyWithWhereWithoutEntryInput = {
+    where: EntryAnswerScalarWhereInput
+    data: XOR<EntryAnswerUpdateManyMutationInput, EntryAnswerUncheckedUpdateManyWithoutEntryInput>
+  }
+
+  export type EntryAnswerScalarWhereInput = {
+    AND?: EntryAnswerScalarWhereInput | EntryAnswerScalarWhereInput[]
+    OR?: EntryAnswerScalarWhereInput[]
+    NOT?: EntryAnswerScalarWhereInput | EntryAnswerScalarWhereInput[]
+    id?: StringFilter<"EntryAnswer"> | string
+    entryId?: StringFilter<"EntryAnswer"> | string
+    order?: IntFilter<"EntryAnswer"> | number
+    question?: StringFilter<"EntryAnswer"> | string
+    answer?: StringFilter<"EntryAnswer"> | string
+    wordCount?: IntFilter<"EntryAnswer"> | number
+    createdAt?: DateTimeFilter<"EntryAnswer"> | Date | string
+  }
+
+  export type CompetitionEntryCreateWithoutAnswersInput = {
+    id?: string
+    status?: $Enums.EntryStatus
+    overallScore?: Decimal | DecimalJsLike | number | string | null
+    voteCount?: number
+    rank?: number | null
+    submittedAt?: Date | string | null
+    createdAt?: Date | string
+    competition: CompetitionCreateNestedOneWithoutEntriesInput
+    contestant: ContestantCreateNestedOneWithoutEntriesInput
+    scoreResult?: ScoreResultCreateNestedOneWithoutEntryInput
+  }
+
+  export type CompetitionEntryUncheckedCreateWithoutAnswersInput = {
+    id?: string
+    competitionId: string
+    contestantId: string
+    status?: $Enums.EntryStatus
+    overallScore?: Decimal | DecimalJsLike | number | string | null
+    voteCount?: number
+    rank?: number | null
+    submittedAt?: Date | string | null
+    createdAt?: Date | string
+    scoreResult?: ScoreResultUncheckedCreateNestedOneWithoutEntryInput
+  }
+
+  export type CompetitionEntryCreateOrConnectWithoutAnswersInput = {
+    where: CompetitionEntryWhereUniqueInput
+    create: XOR<CompetitionEntryCreateWithoutAnswersInput, CompetitionEntryUncheckedCreateWithoutAnswersInput>
+  }
+
+  export type CompetitionEntryUpsertWithoutAnswersInput = {
+    update: XOR<CompetitionEntryUpdateWithoutAnswersInput, CompetitionEntryUncheckedUpdateWithoutAnswersInput>
+    create: XOR<CompetitionEntryCreateWithoutAnswersInput, CompetitionEntryUncheckedCreateWithoutAnswersInput>
+    where?: CompetitionEntryWhereInput
+  }
+
+  export type CompetitionEntryUpdateToOneWithWhereWithoutAnswersInput = {
+    where?: CompetitionEntryWhereInput
+    data: XOR<CompetitionEntryUpdateWithoutAnswersInput, CompetitionEntryUncheckedUpdateWithoutAnswersInput>
+  }
+
+  export type CompetitionEntryUpdateWithoutAnswersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumEntryStatusFieldUpdateOperationsInput | $Enums.EntryStatus
+    overallScore?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    voteCount?: IntFieldUpdateOperationsInput | number
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    competition?: CompetitionUpdateOneRequiredWithoutEntriesNestedInput
+    contestant?: ContestantUpdateOneRequiredWithoutEntriesNestedInput
+    scoreResult?: ScoreResultUpdateOneWithoutEntryNestedInput
+  }
+
+  export type CompetitionEntryUncheckedUpdateWithoutAnswersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    competitionId?: StringFieldUpdateOperationsInput | string
+    contestantId?: StringFieldUpdateOperationsInput | string
+    status?: EnumEntryStatusFieldUpdateOperationsInput | $Enums.EntryStatus
+    overallScore?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    voteCount?: IntFieldUpdateOperationsInput | number
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    scoreResult?: ScoreResultUncheckedUpdateOneWithoutEntryNestedInput
+  }
+
   export type CompetitionCreateWithoutVotesInput = {
     id?: string
     title: string
@@ -17754,6 +19820,9 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     status?: $Enums.CompetitionStatus
+    bannerImage?: string | null
+    prizePool?: string | null
+    questions?: CompetitionCreatequestionsInput | string[]
     createdAt?: Date | string
     entries?: CompetitionEntryCreateNestedManyWithoutCompetitionInput
   }
@@ -17766,6 +19835,9 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     status?: $Enums.CompetitionStatus
+    bannerImage?: string | null
+    prizePool?: string | null
+    questions?: CompetitionCreatequestionsInput | string[]
     createdAt?: Date | string
     entries?: CompetitionEntryUncheckedCreateNestedManyWithoutCompetitionInput
   }
@@ -17827,6 +19899,9 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumCompetitionStatusFieldUpdateOperationsInput | $Enums.CompetitionStatus
+    bannerImage?: NullableStringFieldUpdateOperationsInput | string | null
+    prizePool?: NullableStringFieldUpdateOperationsInput | string | null
+    questions?: CompetitionUpdatequestionsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entries?: CompetitionEntryUpdateManyWithoutCompetitionNestedInput
   }
@@ -17839,6 +19914,9 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumCompetitionStatusFieldUpdateOperationsInput | $Enums.CompetitionStatus
+    bannerImage?: NullableStringFieldUpdateOperationsInput | string | null
+    prizePool?: NullableStringFieldUpdateOperationsInput | string | null
+    questions?: CompetitionUpdatequestionsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entries?: CompetitionEntryUncheckedUpdateManyWithoutCompetitionNestedInput
   }
@@ -17888,9 +19966,11 @@ export namespace Prisma {
     overallScore?: Decimal | DecimalJsLike | number | string | null
     voteCount?: number
     rank?: number | null
+    submittedAt?: Date | string | null
     createdAt?: Date | string
     competition: CompetitionCreateNestedOneWithoutEntriesInput
     contestant: ContestantCreateNestedOneWithoutEntriesInput
+    answers?: EntryAnswerCreateNestedManyWithoutEntryInput
   }
 
   export type CompetitionEntryUncheckedCreateWithoutScoreResultInput = {
@@ -17901,7 +19981,9 @@ export namespace Prisma {
     overallScore?: Decimal | DecimalJsLike | number | string | null
     voteCount?: number
     rank?: number | null
+    submittedAt?: Date | string | null
     createdAt?: Date | string
+    answers?: EntryAnswerUncheckedCreateNestedManyWithoutEntryInput
   }
 
   export type CompetitionEntryCreateOrConnectWithoutScoreResultInput = {
@@ -17926,9 +20008,11 @@ export namespace Prisma {
     overallScore?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     voteCount?: IntFieldUpdateOperationsInput | number
     rank?: NullableIntFieldUpdateOperationsInput | number | null
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     competition?: CompetitionUpdateOneRequiredWithoutEntriesNestedInput
     contestant?: ContestantUpdateOneRequiredWithoutEntriesNestedInput
+    answers?: EntryAnswerUpdateManyWithoutEntryNestedInput
   }
 
   export type CompetitionEntryUncheckedUpdateWithoutScoreResultInput = {
@@ -17939,7 +20023,9 @@ export namespace Prisma {
     overallScore?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     voteCount?: IntFieldUpdateOperationsInput | number
     rank?: NullableIntFieldUpdateOperationsInput | number | null
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    answers?: EntryAnswerUncheckedUpdateManyWithoutEntryNestedInput
   }
 
   export type AccountCreateManyUserInput = {
@@ -18068,6 +20154,7 @@ export namespace Prisma {
     overallScore?: Decimal | DecimalJsLike | number | string | null
     voteCount?: number
     rank?: number | null
+    submittedAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -18098,9 +20185,11 @@ export namespace Prisma {
     overallScore?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     voteCount?: IntFieldUpdateOperationsInput | number
     rank?: NullableIntFieldUpdateOperationsInput | number | null
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     competition?: CompetitionUpdateOneRequiredWithoutEntriesNestedInput
     scoreResult?: ScoreResultUpdateOneWithoutEntryNestedInput
+    answers?: EntryAnswerUpdateManyWithoutEntryNestedInput
   }
 
   export type CompetitionEntryUncheckedUpdateWithoutContestantInput = {
@@ -18110,8 +20199,10 @@ export namespace Prisma {
     overallScore?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     voteCount?: IntFieldUpdateOperationsInput | number
     rank?: NullableIntFieldUpdateOperationsInput | number | null
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     scoreResult?: ScoreResultUncheckedUpdateOneWithoutEntryNestedInput
+    answers?: EntryAnswerUncheckedUpdateManyWithoutEntryNestedInput
   }
 
   export type CompetitionEntryUncheckedUpdateManyWithoutContestantInput = {
@@ -18121,6 +20212,7 @@ export namespace Prisma {
     overallScore?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     voteCount?: IntFieldUpdateOperationsInput | number
     rank?: NullableIntFieldUpdateOperationsInput | number | null
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -18131,6 +20223,7 @@ export namespace Prisma {
     overallScore?: Decimal | DecimalJsLike | number | string | null
     voteCount?: number
     rank?: number | null
+    submittedAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -18148,9 +20241,11 @@ export namespace Prisma {
     overallScore?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     voteCount?: IntFieldUpdateOperationsInput | number
     rank?: NullableIntFieldUpdateOperationsInput | number | null
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contestant?: ContestantUpdateOneRequiredWithoutEntriesNestedInput
     scoreResult?: ScoreResultUpdateOneWithoutEntryNestedInput
+    answers?: EntryAnswerUpdateManyWithoutEntryNestedInput
   }
 
   export type CompetitionEntryUncheckedUpdateWithoutCompetitionInput = {
@@ -18160,8 +20255,10 @@ export namespace Prisma {
     overallScore?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     voteCount?: IntFieldUpdateOperationsInput | number
     rank?: NullableIntFieldUpdateOperationsInput | number | null
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     scoreResult?: ScoreResultUncheckedUpdateOneWithoutEntryNestedInput
+    answers?: EntryAnswerUncheckedUpdateManyWithoutEntryNestedInput
   }
 
   export type CompetitionEntryUncheckedUpdateManyWithoutCompetitionInput = {
@@ -18171,6 +20268,7 @@ export namespace Prisma {
     overallScore?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     voteCount?: IntFieldUpdateOperationsInput | number
     rank?: NullableIntFieldUpdateOperationsInput | number | null
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -18195,6 +20293,42 @@ export namespace Prisma {
     contestantId?: StringFieldUpdateOperationsInput | string
     voterId?: StringFieldUpdateOperationsInput | string
     ipHash?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EntryAnswerCreateManyEntryInput = {
+    id?: string
+    order: number
+    question: string
+    answer: string
+    wordCount: number
+    createdAt?: Date | string
+  }
+
+  export type EntryAnswerUpdateWithoutEntryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: StringFieldUpdateOperationsInput | string
+    wordCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EntryAnswerUncheckedUpdateWithoutEntryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: StringFieldUpdateOperationsInput | string
+    wordCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EntryAnswerUncheckedUpdateManyWithoutEntryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: StringFieldUpdateOperationsInput | string
+    wordCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
